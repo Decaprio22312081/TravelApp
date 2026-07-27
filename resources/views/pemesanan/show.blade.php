@@ -126,7 +126,7 @@
                             <a href="{{ route('ulasan.create', $pemesanan->id) }}"
                                 class="mt-4 inline-flex items-center gap-2 text-green-700 font-bold text-sm hover:underline">
                                 <span class="material-symbols-outlined text-sm">star</span>
-                                Beri Ulasan
+                                Beri ulasan
                             </a>
                         @endif
                     </div>
