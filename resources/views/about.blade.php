@@ -35,7 +35,7 @@
             </div>
             <h2 class="font-headline-md text-headline-md text-primary mb-4">Visi Kami</h2>
             <p class="text-on-surface-variant leading-relaxed">
-                Menjadi perusahaan travel terpercaya dan terdepan di Bandar Lampung yang menyediakan layanan transportasi dan perjalanan wisata secara profesional, aman, nyaman, dan berkualitas, dengan didukung armada yang terawat, pengemudi yang berpengalaman, pelayanan yang ramah, serta pemanfaatan teknologi digital untuk memberikan kemudahan pemesanan dan pengalaman perjalanan terbaik bagi setiap pelanggan, sekaligus berkontribusi dalam mendukung perkembangan sektor pariwisata dan perekonomian daerah.
+                Menjadi penyedia jasa transportasi dan solusi perjalanan terdepan di Lampung yang diakui karena kualitas armada, integritas layanan, dan kontribusi positif terhadap pariwisata daerah.
             </p>
         </div>
         <div class="bg-primary p-10 rounded-[24px] shadow-lg text-white hover:-translate-y-1 transition-all">
@@ -235,7 +235,7 @@
                         </div>
                     </div>
                     @if($settings['alamat']->value ?? false)
-                    <a class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3 rounded-lg font-bold hover:opacity-90 transition-all shadow-md mt-4" href="https://maps.google.com/?q={{ urlencode($settings['alamat']->value) }}" target="_blank">
+                    <a class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3 rounded-lg font-bold hover:opacity-90 transition-all shadow-md mt-4" href="https://maps.app.goo.gl/DLiSUxbAr7BZRtTF8" target="_blank" rel="noopener noreferrer">
                         <span class="material-symbols-outlined">near_me</span>
                         Petunjuk Arah
                     </a>
@@ -253,6 +253,42 @@
 @push('scripts')
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+    .office-location-marker {
+        background: transparent;
+        border: 0;
+    }
+
+    .office-location-marker .material-symbols-outlined {
+        color: #dc2626;
+        font-size: 42px;
+        line-height: 42px;
+        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.35));
+        font-variation-settings: 'FILL' 1;
+    }
+
+    .office-location-label {
+        color: #991b1b;
+        background: #ffffff;
+        border: 1px solid #fecaca;
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        font-weight: 700;
+        padding: 4px 8px;
+        white-space: nowrap;
+    }
+
+    .partner-location-label {
+        color: #1d4ed8;
+        background: #ffffff;
+        border: 1px solid #bfdbfe;
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        font-weight: 700;
+        padding: 4px 8px;
+        white-space: nowrap;
+    }
+</style>
 <script>
     // Scroll animations
     const observerOptions = { threshold: 0.1 };
@@ -275,15 +311,35 @@
         if (!mapEl) return;
 
         const mitras = @json($mitras);
-        const hasMitraCoords = mitras.some(m => m.latitude && m.longitude);
-        if (!hasMitraCoords) return;
-
-        const bounds = [];
-        const map = L.map('map').setView([-5.291010, 105.191451], 12);
+        const office = {
+            latitude: -5.290991947525421,
+            longitude: 105.1909975633846,
+            name: 'CV. Afia Jaya Abadi Rental Mobil Lampung'
+        };
+        const bounds = [[office.latitude, office.longitude]];
+        const map = L.map('map').setView([office.latitude, office.longitude], 14);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
+
+        const officeIcon = L.divIcon({
+            className: 'office-location-marker',
+            html: '<span class="material-symbols-outlined">location_on</span>',
+            iconSize: [42, 42],
+            iconAnchor: [21, 42],
+            popupAnchor: [0, -42]
+        });
+
+        L.marker([office.latitude, office.longitude], { icon: officeIcon })
+            .addTo(map)
+            .bindPopup(`<b>${office.name}</b>`)
+            .bindTooltip(office.name, {
+                permanent: true,
+                direction: 'top',
+                offset: [0, -42],
+                className: 'office-location-label'
+            });
 
         mitras.forEach(function (m) {
             const lat = parseFloat(m.latitude);
@@ -291,6 +347,12 @@
             if (isNaN(lat) || isNaN(lng)) return;
             const marker = L.marker([lat, lng]).addTo(map);
             marker.bindPopup(`<b>${m.nama}</b><br>${m.alamat}${m.no_telp ? '<br>Telp: ' + m.no_telp : ''}`);
+            marker.bindTooltip(m.nama, {
+                permanent: true,
+                direction: 'top',
+                offset: [0, -36],
+                className: 'partner-location-label'
+            });
             bounds.push([lat, lng]);
         });
 
