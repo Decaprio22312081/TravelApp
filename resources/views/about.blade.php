@@ -35,7 +35,7 @@
             </div>
             <h2 class="font-headline-md text-headline-md text-primary mb-4">Visi Kami</h2>
             <p class="text-on-surface-variant leading-relaxed">
-                Menjadi penyedia jasa transportasi dan solusi perjalanan terdepan di Lampung yang diakui karena kualitas armada, integritas layanan, dan kontribusi positif terhadap pariwisata daerah.
+                Menjadi perusahaan travel terpercaya dan terdepan di Bandar Lampung yang menyediakan layanan transportasi dan perjalanan wisata secara profesional, aman, nyaman, dan berkualitas, dengan didukung armada yang terawat, pengemudi yang berpengalaman, pelayanan yang ramah, serta pemanfaatan teknologi digital untuk memberikan kemudahan pemesanan dan pengalaman perjalanan terbaik bagi setiap pelanggan, sekaligus berkontribusi dalam mendukung perkembangan sektor pariwisata dan perekonomian daerah.
             </p>
         </div>
         <div class="bg-primary p-10 rounded-[24px] shadow-lg text-white hover:-translate-y-1 transition-all">
@@ -279,7 +279,7 @@
         if (!hasMitraCoords) return;
 
         const bounds = [];
-        const map = L.map('map').setView([-5.3971, 105.2663], 12);
+        const map = L.map('map').setView([-5.291010, 105.191451], 12);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'

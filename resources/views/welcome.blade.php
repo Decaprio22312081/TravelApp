@@ -15,7 +15,7 @@
                Travel Wisata Bandar Lampung  <span class="text-secondary-fixed">Cv.Afia Jaya Abadi</span>
             </h2>
             <p class="font-body-lg text-lg md:text-xl opacity-90 mb-10 max-w-xl">
-                Nikmati kemudahan menyewa mobil dengan pilihan lepas kunci atau driver berpengalaman. Harga terjangkau, proses cepat, dan siap menemani perjalanan Anda ke berbagai destinasi di Lampung.
+                Nikmati kemudahan menyewa mobil dengan pilihan lepas kunci atau driver berpengalaman. Harga terjangkau, proses cepat, dan siap menemani perjalanan Anda ke berbagai destinasi di bandar Lampung.
             </p>
             <div class="flex flex-wrap gap-4">
                 <a href="{{ route('pemesanan.create') }}" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-primary-container transition-all active:scale-95 shadow-lg flex items-center gap-2">

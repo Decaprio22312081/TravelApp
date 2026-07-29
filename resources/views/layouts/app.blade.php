@@ -79,7 +79,7 @@
         <nav class="flex items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
             <div class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">directions_car</span>
-                <a href="{{ url('/') }}" class="font-display-lg text-xl font-bold text-primary">TravelKu</a>
+                <a href="{{ url('/') }}" class="font-display-lg text-xl font-bold text-primary">Cv.Afia Jaya Abadi</a>
             </div>
             <div class="flex items-center gap-6 ml-auto">
                 <div class="hidden md:flex items-center gap-8">
@@ -186,14 +186,15 @@
         @yield('footer')
     @else
     <footer class="w-full py-20 bg-on-tertiary-fixed">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-            <div class="space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+            <div class="space-y-5">
                 <div class="flex items-center gap-2">
                     <span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: 'FILL' 1;">directions_car</span>
-                    <h3 class="font-display-lg text-xl font-bold text-white">TravelKu</h3>
+                    <h3 class="font-display-lg text-xl font-bold text-white">Cv.Afia Jaya Abadi</h3>
                 </div>
-                <p class="text-surface-container-low font-body-md opacity-80 leading-relaxed">Solusi transportasi terbaik di Bandar Lampung untuk keperluan wisata, bisnis, dan keluarga dengan pelayanan premium.</p>
-                <div class="flex gap-4">
+                <p class="text-surface-container-low font-body-md opacity-80 leading-relaxed">Perjalanan menjadi lebih mudah bersama layanan travel 
+                    profesional di Bandar Lampung. Armada bersih dan nyaman, pengemudi berpengalaman, serta pelayanan yang mengutamakan keamanan dan kepuasan pelanggan.</p>
+                <div class="flex gap-3 pt-2">
                     <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
                         <span class="material-symbols-outlined">public</span>
                     </a>
@@ -205,41 +206,46 @@
             <div>
                 <h4 class="text-white font-bold mb-6 font-display-lg">Quick Links</h4>
                 <ul class="space-y-4">
-                    <li><a href="{{ url('/') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md">Home</a></li>
-                    <li><a href="{{ route('destinasi.index') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md">Destinasi</a></li>
-                    <li><a href="{{ route('mobil.index') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md">Mobil</a></li>
-                    <li><a href="{{ route('tentang-kami') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md">Tentang Kami</a></li>
+                    <li><a href="{{ url('/') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary-fixed">chevron_right</span>Home</a></li>
+                    <li><a href="{{ route('destinasi.index') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary-fixed">chevron_right</span>Destinasi</a></li>
+                    <li><a href="{{ route('mobil.index') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary-fixed">chevron_right</span>Mobil</a></li>
+                    <li><a href="{{ route('tentang-kami') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary-fixed">chevron_right</span>Tentang Kami</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-white font-bold mb-6 font-display-lg">Layanan</h4>
                 <ul class="space-y-4">
-                    <li><a href="{{ route('pemesanan.create') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md">Pesan Travel</a></li>
-                    <li><a href="{{ route('pemesanan.riwayat') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md">Riwayat Pemesanan</a></li>
-                    <li><a href="{{ route('dashboard') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md">Dashboard</a></li>
+                    <li><a href="{{ route('pemesanan.create') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary-fixed">chevron_right</span>Pesan Travel</a></li>
+                    <li><a href="{{ route('pemesanan.riwayat') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary-fixed">chevron_right</span>Riwayat Pemesanan</a></li>
+                    <li><a href="{{ route('dashboard') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary-fixed">chevron_right</span>Dashboard</a></li>
+                    <li><a href="{{ route('login') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary-fixed">chevron_right</span>Login / Register</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-white font-bold mb-6 font-display-lg">Hubungi Kami</h4>
+                @php $settings = \App\Models\Setting::all()->keyBy('key'); @endphp
                 <ul class="space-y-4 text-surface-container-low">
-                    @php $settings = \App\Models\Setting::all()->keyBy('key'); @endphp
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-secondary-fixed">phone</span>
-                        <span>{{ $settings['no_telp']->value ?? '+62 812-3456-7890' }}</span>
+                        <span class="material-symbols-outlined text-secondary-fixed mt-0.5">phone</span>
+                        <span class="font-body-md">{{ $settings['no_telp']->value ?? '+62 812-3456-7890' }}</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-secondary-fixed">mail</span>
-                        <span>{{ $settings['email']->value ?? 'info@travelku.com' }}</span>
+                        <span class="material-symbols-outlined text-secondary-fixed mt-0.5">chat</span>
+                        <span class="font-body-md">{{ $settings['no_whatsapp']->value ?? '+62 821-1234-5678' }}</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="material-symbols-outlined text-secondary-fixed">location_on</span>
-                        <span>{{ $settings['alamat']->value ?? 'Bandar Lampung, Lampung' }}</span>
+                        <span class="material-symbols-outlined text-secondary-fixed mt-0.5">mail</span>
+                        <span class="font-body-md">{{ $settings['email']->value ?? 'info@travelku.com' }}</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-secondary-fixed mt-0.5">location_on</span>
+                        <span class="font-body-md">{{ $settings['alamat']->value ?? 'Bandar Lampung, Lampung' }}</span>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="mt-20 pt-8 border-t border-white/10 text-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-            <p class="text-surface-container-low opacity-60 font-body-md">&copy; {{ date('Y') }} TravelKu. Premium Car Rental Services.</p>
+        <div class="mt-16 pt-8 border-t border-white/10 text-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+            <p class="text-surface-container-low font-body-md">&copy; {{ date('Y') }} TravelKu. All rights reserved.</p>
         </div>
     </footer>
     @endif

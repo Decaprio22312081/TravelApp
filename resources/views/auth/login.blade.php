@@ -83,7 +83,7 @@ tailwind.config = {
     <nav class="flex items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
         <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">directions_car</span>
-            <a href="{{ url('/') }}" class="font-display-lg text-xl font-bold text-primary">TravelKu</a>
+            <a href="{{ url('/') }}" class="font-display-lg text-xl font-bold text-primary">Cv.Afia Jaya Abadi</a>
         </div>
         <div class="flex items-center gap-6 ml-auto">
             <div class="hidden md:flex items-center gap-8">
@@ -166,8 +166,8 @@ tailwind.config = {
 <div class="hidden lg:block relative min-h-[600px]">
 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80');"></div>
 <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex flex-col justify-end p-12">
-<h2 class="font-display-lg text-display-lg text-on-primary mb-4">Your Journey Begins Here</h2>
-<p class="font-body-lg text-body-lg text-on-primary/90 max-w-md">Nikmati standar premium sewa mobil di Bandar Lampung. Keandalan dan kenyamanan di setiap perjalanan.</p>
+<h2 class="font-display-lg text-display-lg text-on-primary mb-4">Travel Wisata Bandar Lampung Cv.Afia Jaya Abadi</h2>
+<p class="font-body-lg text-body-lg text-on-primary/90 max-w-md"> Nikmati kemudahan menyewa mobil dengan pilihan lepas kunci atau driver berpengalaman. Harga terjangkau, proses cepat, dan siap menemani perjalanan Anda ke berbagai destinasi di bandar Lampung.</p>
 </div>
 </div>
 <div class="flex flex-col justify-center p-8 sm:p-12 lg:p-16 bg-surface">
