@@ -6,7 +6,7 @@
 {{-- HERO --}}
 <section class="relative h-[90vh] min-h-[700px] flex items-center overflow-hidden">
     <div class="absolute inset-0 z-0">
-        <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1600&q=80')"></div>
+        <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset('images/hero-pantai-mobil.png') }}')"></div>
         <div class="absolute inset-0 hero-gradient"></div>
     </div>
     <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full text-white">

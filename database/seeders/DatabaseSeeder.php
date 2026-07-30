@@ -195,7 +195,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Setting::create(['key' => 'no_whatsapp', 'value' => '6282112345678']);
-        Setting::create(['key' => 'no_telp', 'value' => '0721-888999']);
+        Setting::create(['key' => 'no_telp', 'value' => '0853 7915 3783']);
         Setting::create(['key' => 'email', 'value' => 'info@travelku.com']);
         Setting::create(['key' => 'alamat', 'value' => 'Jl. Raden Intan No. 123, Bandar Lampung']);
         Setting::create(['key' => 'facebook', 'value' => 'travelkulanteng']);

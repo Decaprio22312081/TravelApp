@@ -16,11 +16,14 @@ TravelKu — Laravel 13.8 travel/rental mobil app for Bandar Lampung, Indonesia.
 ## Stack
 
 - PHP 8.3, Laravel 13.8, SQLite (dev + testing), Blade templates (no Livewire/Inertia)
-- Tailwind CSS v4, Vite 8 with `@tailwindcss/vite` plugin, plus **CDN Tailwind** on auth pages (login/register/forgot-password)
+- Tailwind CSS v4 via **CDN** on both public and admin layouts (with `@tailwindcss/vite` plugin also configured)
 - Alpine.js loaded via CDN (`alpinejs@3.x.x`) — no npm package
-- Material Symbols icons via Google Fonts (`Material+Symbols+Outlined`)
-- Maps: Google Maps embed (`destinasi/show`), Leaflet/OpenStreetMap (`about`)
+- Material Symbols icons via Google Fonts on all pages; Font Awesome 6 also loaded on **admin** layout
+- Front-end font: Instrument Sans (Vite/Bunny); Admin font: Montserrat (Google Fonts)
+- Maps: Google Maps embed (`destinasi/show`), Leaflet/OpenStreetMap (`tentang-kami`)
 - `.npmrc` sets `ignore-scripts=true`
+- **File uploads:** `public` disk (`storage/app/public`), paths `users/foto`, `users/ktp`
+- Vite watch ignores `storage/framework/views/**`
 
 ## Architecture
 
@@ -32,20 +35,20 @@ Single Laravel project. Non-default drivers (all `database`): `SESSION_DRIVER`, 
 | `app/Http/Controllers/` | Public controllers; `Admin/` subdir for admin panel |
 | `app/Http/Middleware/AdminMiddleware.php` | Checks `User::isAdmin()` (`role === 'admin'`), returns 403 |
 | `routes/web.php` | All routes (no API routes); admin prefix `/admin` with `auth` + `admin` middleware |
-| `resources/views/` | Blade views per feature: admin/, auth/, dashboard/, destinasi/, mobil/, etc. |
-| `database/migrations/` | Prefixed `2025_01_01_*` |
+| `resources/views/` | Blade views per feature; single layout `layouts/app.blade.php`, separate `admin/layouts/app.blade.php` |
+| `database/migrations/` | Prefixed `2025_01_01_*` for app tables; `0001_01_01_*` for Laravel system tables |
 | `database/seeders/DatabaseSeeder.php` | Demo data including admin + user |
 
 ## Conventions
 
-- **Models:** 9 of 10 use traditional `protected $fillable` arrays. Only `User.php` uses PHP 8 `#[Fillable]` / `#[Hidden]` attributes.
+- **Models:** 9 of 10 use `protected $fillable` arrays. Only `User.php` uses PHP 8 `#[Fillable]` / `#[Hidden]` attributes.
 - **Indonesian naming:** `pemesanan` (order), `pembayaran` (payment), `destinasi` (destination), `ulasan` (review), `mobil` (car), `mitra` (partner)
 - **Route names:** dot notation (`pemesanan.create`, `admin.dashboard`)
-- **File uploads:** `public` disk, paths `users/foto`, `users/ktp`
-- **Auth routes** (guest): `/login`, `/register`, `/forgot-password`
-- **Authenticated routes** (auth): `/dashboard`, `/profile`, `/pesan`, `/riwayat`, `/pembayaran/*`, `/ulasan/*`
+- **Auth auto-redirect:** Admin → `/admin/dashboard`, user → `/dashboard` (see `AuthController::authenticate`)
+- **Guest routes:** `/login`, `/register`, `/forgot-password`
+- **Auth routes:** `/dashboard`, `/profile`, `/pesan`, `/riwayat`, `/pembayaran/*`, `/ulasan/*`
 
-## Demo Credentials (from DatabaseSeeder)
+## Demo Credentials
 
 | Role | Email | Password |
 |---|---|---|
@@ -55,9 +58,12 @@ Single Laravel project. Non-default drivers (all `database`): `SESSION_DRIVER`, 
 ## Testing
 
 - PHPUnit 12.5, in-memory SQLite (`DB_DATABASE=:memory:` in `phpunit.xml`), config cache cleared before run
-- Suites: `Unit` and `Feature` (only default ExampleTest stubs exist — add tests as needed)
+- Suites: `Unit` and `Feature` (only default ExampleTest stubs exist)
 - No external services required
 
 ## Gotchas
 
+- `composer setup` does NOT run `storage:link` — run `php artisan storage:link` after setup for file uploads
 - `composer dev` requires Node.js (uses `npx concurrently`)
+- `database/database.sqlite` already exists in the repo (committed for dev)
+- `APP_LOCALE=en` in `.env` but all UI is Indonesian — no translation system used

@@ -6,7 +6,7 @@
 {{-- HERO --}}
 <section class="relative h-[500px] md:h-[600px] flex items-center overflow-hidden">
     <div class="absolute inset-0 z-0">
-        <div class="w-full h-full bg-cover bg-center scale-105" style="background-image: url('https://images.unsplash.com/photo-1569949381669-ecf31ae8f613?w=1600&q=80');"></div>
+        <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset('images/hero-pantai-mobil.png') }}');"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-[#131d24]/80 to-transparent"></div>
     </div>
     <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
@@ -224,14 +224,14 @@
                         <span class="material-symbols-outlined text-primary mt-1">call</span>
                         <div>
                             <h5 class="font-bold mb-1">Telepon & WhatsApp</h5>
-                            <p class="text-on-surface-variant">{{ $settings['no_telp']->value ?? '+62 812-3456-7890' }}<br>{{ $settings['email']->value ?? '-' }}</p>
+                            <p class="text-on-surface-variant">0853 7915 3783<br>{{ $settings['email']->value ?? '-' }}</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
                         <span class="material-symbols-outlined text-primary mt-1">schedule</span>
                         <div>
                             <h5 class="font-bold mb-1">Jam Operasional</h5>
-                            <p class="text-on-surface-variant">Senin - Minggu: 07.00 - 22.00 WIB</p>
+                            <p class="text-on-surface-variant">Senin - Minggu: 08.00 - 22.00 WIB</p>
                         </div>
                     </div>
                     @if($settings['alamat']->value ?? false)
