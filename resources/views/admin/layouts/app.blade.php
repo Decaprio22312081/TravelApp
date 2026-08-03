@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script>
@@ -18,27 +18,27 @@
                 extend: {
                     colors: {
                         "on-tertiary": "#ffffff",
-                        "surface-container-high": "#e6e8ea",
-                        "surface-container": "#eceef0",
-                        "surface-bright": "#f7f9fb",
-                        "tertiary-container": "#006083",
-                        "on-secondary-container": "#5c647a",
+                        "surface-container-high": "#e4e3db",
+                        "surface-container": "#ecebe4",
+                        "surface-bright": "#f7f6f1",
+                        "tertiary-container": "#2e6b54",
+                        "on-secondary-container": "#52645b",
                         "on-error": "#ffffff",
-                        "surface-variant": "#e0e3e5",
-                        "background": "#f7f9fb",
-                        "secondary-fixed-dim": "#bec6e0",
+                        "surface-variant": "#dfded6",
+                        "background": "#f7f6f1",
+                        "secondary-fixed-dim": "#d8e3dc",
                         "on-tertiary-container": "#97d8ff",
                         "tertiary-fixed": "#c4e7ff",
-                        "on-primary-fixed-variant": "#004491",
-                        "on-surface-variant": "#424752",
-                        "secondary-fixed": "#dae2fd",
-                        "outline": "#727784",
-                        "primary-fixed-dim": "#acc7ff",
-                        "inverse-primary": "#acc7ff",
+                        "on-primary-fixed-variant": "#1f4d3d",
+                        "on-surface-variant": "#59635d",
+                        "secondary-fixed": "#e4ece7",
+                        "outline": "#78837c",
+                        "primary-fixed-dim": "#b9d2c4",
+                        "inverse-primary": "#b9d2c4",
                         "on-primary": "#ffffff",
-                        "surface-tint": "#115cb9",
-                        "surface-container-low": "#f2f4f6",
-                        "tertiary": "#004762",
+                        "surface-tint": "#1f4d3d",
+                        "surface-container-low": "#f0efe9",
+                        "tertiary": "#1f4d3d",
                         "inverse-on-surface": "#eff1f3",
                         "surface-container-lowest": "#ffffff",
                         "on-error-container": "#93000a",
@@ -47,23 +47,23 @@
                         "surface": "#f7f9fb",
                         "tertiary-fixed-dim": "#7bd0ff",
                         "error-container": "#ffdad6",
-                        "on-background": "#191c1e",
-                        "surface-container-highest": "#e0e3e5",
-                        "primary-container": "#0056b3",
-                        "primary": "#003f87",
-                        "on-primary-fixed": "#001a40",
-                        "on-primary-container": "#bbd0ff",
-                        "on-surface": "#191c1e",
-                        "primary-fixed": "#d7e2ff",
-                        "secondary-container": "#dae2fd",
-                        "outline-variant": "#c2c6d4",
-                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-background": "#1e2924",
+                        "surface-container-highest": "#dfded6",
+                        "primary-container": "#2e6b54",
+                        "primary": "#1f4d3d",
+                        "on-primary-fixed": "#123126",
+                        "on-primary-container": "#d8e8dc",
+                        "on-surface": "#1e2924",
+                        "primary-fixed": "#dbeadf",
+                        "secondary-container": "#e4ece7",
+                        "outline-variant": "#d1d2c9",
+                        "on-secondary-fixed-variant": "#24483b",
                         "on-tertiary-fixed": "#001e2c",
-                        "surface-dim": "#d8dadc",
+                        "surface-dim": "#dcdbd3",
                         "on-secondary": "#ffffff",
                         "inverse-surface": "#2d3133",
                         "error": "#ba1a1a",
-                        "secondary": "#565e74"
+                        "secondary": "#183b31"
                     },
                     borderRadius: {
                         DEFAULT: "0.25rem",
@@ -72,8 +72,8 @@
                         full: "9999px"
                     },
                     fontFamily: {
-                        sans: ["Montserrat", "sans-serif"],
-                        display: ["Montserrat", "sans-serif"],
+                        sans: ["DM Sans", "sans-serif"],
+                        display: ["Fraunces", "serif"],
                     },
                     fontSize: {
                         "display-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }],
@@ -94,6 +94,9 @@
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .rounded-xl { border-radius: 0.875rem !important; }
+        .rounded-lg { border-radius: 0.625rem !important; }
+        .shadow-lg { box-shadow: 0 14px 32px rgba(30, 41, 36, 0.10) !important; }
     </style>
     @stack('styles')
 </head>
@@ -106,7 +109,7 @@
 <aside id="sidebar" class="fixed top-0 left-0 z-40 h-screen w-[280px] bg-secondary flex flex-col transition-transform duration-300 -translate-x-full lg:translate-x-0">
     <div class="p-8">
         <h1 class="font-display text-display-lg font-bold text-surface-container-lowest">Dashboard</h1>
-        <p class="text-label-caps text-secondary-fixed-dim mt-1 opacity-70">Car Rental System</p>
+        <p class="text-label-caps text-secondary-fixed-dim mt-1 opacity-70">Manajemen operasional</p>
     </div>
 
     <nav class="flex-1 overflow-y-auto px-4 py-6 custom-scrollbar">

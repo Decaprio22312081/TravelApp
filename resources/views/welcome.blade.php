@@ -4,18 +4,19 @@
 
 @section('content')
 {{-- HERO --}}
-<section class="relative h-[90vh] min-h-[700px] flex items-center overflow-hidden">
+<section class="relative h-[78vh] min-h-[580px] flex items-center overflow-hidden">
     <div class="absolute inset-0 z-0">
         <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset('images/hero-pantai-mobil.png') }}')"></div>
         <div class="absolute inset-0 hero-gradient"></div>
     </div>
     <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full text-white">
         <div class="max-w-2xl">
-            <h2 class="font-display-lg text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
-               Travel Wisata Bandar Lampung  <span class="text-secondary-fixed">Cv.Afia Jaya Abadi</span>
+            <p class="mb-5 text-sm font-bold uppercase tracking-[0.18em] text-secondary-fixed">Rental mobil & perjalanan Lampung</p>
+            <h2 class="font-display-lg text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-6">
+               Perjalanan nyaman, dimulai dari <span class="text-secondary-fixed">kendaraan yang tepat.</span>
             </h2>
             <p class="font-body-lg text-lg md:text-xl opacity-90 mb-10 max-w-xl">
-                Nikmati kemudahan menyewa mobil dengan pilihan lepas kunci atau driver berpengalaman. Harga terjangkau, proses cepat, dan siap menemani perjalanan Anda ke berbagai destinasi di bandar Lampung.
+                Pilih armada yang terawat dan perjalanan yang sesuai rencana Anda. Kami siap melayani kebutuhan wisata, dinas, hingga antar-jemput di Lampung.
             </p>
             <div class="flex flex-wrap gap-4">
                 <a href="{{ route('pemesanan.create') }}" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-primary-container transition-all active:scale-95 shadow-lg flex items-center gap-2">
@@ -29,7 +30,7 @@
 
 {{-- BOOKING WIDGET --}}
 <section class="relative z-20 -mt-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto" id="booking">
-    <div class="bg-white/85 backdrop-blur-xl p-8 md:p-10 rounded-4xl shadow-2xl border border-white/20">
+    <div class="bg-surface-container-lowest p-6 md:p-8 rounded-2xl shadow-xl border border-outline-variant">
         <form action="{{ route('pemesanan.create') }}" method="GET">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 items-end">
                 <div class="space-y-2">
@@ -95,7 +96,7 @@
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
         @forelse($destinasis as $d)
-        <div class="group relative h-[400px] rounded-4xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+        <div class="group relative h-[400px] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
             @if($d->foto)
             <img src="{{ asset('storage/'.$d->foto) }}" alt="{{ $d->nama }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
             @else
@@ -137,7 +138,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
             @forelse($mobils as $m)
-            <div class="bg-surface-container-lowest rounded-4xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+            <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300">
                 <div class="rounded-3xl overflow-hidden aspect-[3/2] mb-6 bg-surface-container-low">
                     @if($m->foto)
                     <img src="{{ asset('storage/'.$m->foto) }}" alt="{{ $m->nama }}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
@@ -202,7 +203,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
         @forelse($ulasans as $u)
-        <div class="bg-surface-container-lowest p-8 rounded-4xl shadow-sm border border-surface-variant hover:shadow-md transition-shadow">
+        <div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-surface-variant hover:shadow-md transition-shadow">
             <div class="flex gap-1 text-yellow-500 mb-6">
                 @for($i = 1; $i <= 5; $i++)
                 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">{{ $i <= $u->rating ? 'star' : 'star_border' }}</span>
@@ -233,31 +234,4 @@
 <style>
     [x-cloak] { display: none !important; }
 </style>
-<script>
-    // Scroll reveal animation
-    const observerOptions = { threshold: 0.1 };
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('opacity-100', 'translate-y-0');
-                entry.target.classList.remove('opacity-0', 'translate-y-10');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('section').forEach(section => {
-        if (!section.closest('.fixed')) {
-            section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
-            observer.observe(section);
-        }
-    });
-
-    // Instant visibility for hero
-    const hero = document.querySelector('section');
-    if (hero) {
-        hero.classList.remove('opacity-0', 'translate-y-10');
-        hero.classList.add('opacity-100', 'translate-y-0');
-    }
-</script>
 @endpush

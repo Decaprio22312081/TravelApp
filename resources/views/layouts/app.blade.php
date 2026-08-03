@@ -8,43 +8,43 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#0056b3',
-                        'primary-container': '#003d80',
-                        secondary: '#325ea2',
-                        'secondary-fixed': '#d7e2ff',
-                        'secondary-fixed-dim': '#abc7ff',
-                        background: '#f8f9fa',
-                        surface: '#f8f9fa',
-                        'surface-dim': '#d9dadb',
-                        'surface-bright': '#f8f9fa',
+                        primary: '#1f4d3d',
+                        'primary-container': '#14382d',
+                        secondary: '#b7793d',
+                        'secondary-fixed': '#f5dfbe',
+                        'secondary-fixed-dim': '#e5bf83',
+                        background: '#f7f6f1',
+                        surface: '#f7f6f1',
+                        'surface-dim': '#deded7',
+                        'surface-bright': '#f7f6f1',
                         'surface-container-lowest': '#ffffff',
-                        'surface-container-low': '#f3f4f5',
-                        'surface-container': '#edeeef',
-                        'surface-container-high': '#e7e8e9',
-                        'surface-container-highest': '#e1e3e4',
-                        'on-surface': '#191c1d',
-                        'on-surface-variant': '#424752',
-                        'outline': '#727784',
-                        'outline-variant': '#c2c6d4',
-                        'on-tertiary-fixed': '#131d24',
+                        'surface-container-low': '#efeee8',
+                        'surface-container': '#e8e7df',
+                        'surface-container-high': '#e1e0d7',
+                        'surface-container-highest': '#d9d8cf',
+                        'on-surface': '#1e2924',
+                        'on-surface-variant': '#59635d',
+                        'outline': '#7a837d',
+                        'outline-variant': '#d1d2c9',
+                        'on-tertiary-fixed': '#18261f',
                     },
                     borderRadius: {
-                        '2xl': '0.75rem',
+                        '2xl': '0.875rem',
                         '3xl': '1rem',
-                        '4xl': '1.5rem',
+                        '4xl': '1.25rem',
                     },
                     fontFamily: {
-                        'display-lg': ['Montserrat', 'sans-serif'],
-                        'headline-md': ['Montserrat', 'sans-serif'],
-                        'body-lg': ['Inter', 'sans-serif'],
-                        'body-md': ['Inter', 'sans-serif'],
-                        'label-sm': ['Inter', 'sans-serif'],
+                        'display-lg': ['Fraunces', 'serif'],
+                        'headline-md': ['Fraunces', 'serif'],
+                        'body-lg': ['DM Sans', 'sans-serif'],
+                        'body-md': ['DM Sans', 'sans-serif'],
+                        'label-sm': ['DM Sans', 'sans-serif'],
                     },
                     maxWidth: {
                         'container-max': '1280px',
@@ -62,24 +62,31 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+        html { scroll-behavior: smooth; }
         .glass-nav {
-            background: rgba(255, 255, 255, 0.90);
-            backdrop-filter: blur(12px);
+            background: rgba(247, 246, 241, 0.94);
+            backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(31, 77, 61, 0.10);
         }
         .hero-gradient {
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.15) 50%, rgba(248, 249, 250, 1) 100%);
+            background: linear-gradient(90deg, rgba(18, 38, 30, 0.82) 0%, rgba(18, 38, 30, 0.42) 48%, rgba(18, 38, 30, 0.08) 100%);
         }
+        .rounded-4xl { border-radius: 1.25rem !important; }
+        .rounded-3xl { border-radius: 1rem !important; }
+        .rounded-\[24px\] { border-radius: 1rem !important; }
+        .shadow-xl, .shadow-2xl { box-shadow: 0 18px 42px rgba(30, 41, 36, 0.12) !important; }
+        input, select, textarea { box-shadow: none !important; }
     </style>
 </head>
 <body class="bg-background font-body-md text-on-surface selection:bg-primary selection:text-white">
 
     {{-- NAVBAR --}}
-    <header class="fixed top-0 w-full z-50 glass-nav shadow-sm">
+    <header class="fixed top-0 w-full z-50 glass-nav" x-data="{ mobileOpen: false }">
         <nav class="flex items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
             <div class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">directions_car</span>
-                <a href="{{ url('/') }}" class="font-display-lg text-xl font-bold text-primary">Cv.Afia Jaya Abadi</a>
+                <a href="{{ url('/') }}" class="font-display-lg text-xl font-bold text-primary">Afia Jaya Abadi</a>
             </div>
             <div class="flex items-center gap-6 ml-auto">
                 <div class="hidden md:flex items-center gap-8">
@@ -126,14 +133,14 @@
                     </div>
                 @endauth
                 {{-- Mobile menu toggle --}}
-                <button class="md:hidden text-on-surface-variant hover:text-primary transition-colors" @click="mobileOpen = !mobileOpen" x-data="{ mobileOpen: false }">
+                <button class="md:hidden text-on-surface-variant hover:text-primary transition-colors" @click="mobileOpen = !mobileOpen">
                     <span class="material-symbols-outlined text-2xl" x-text="mobileOpen ? 'close' : 'menu'">menu</span>
                 </button>
             </div>
             </div>
         </nav>
         {{-- Mobile menu --}}
-        <div class="md:hidden border-t border-outline-variant bg-surface-container-lowest" x-data="{ mobileOpen: false }" x-show="mobileOpen" @click.away="mobileOpen = false" x-cloak>
+        <div class="md:hidden border-t border-outline-variant bg-surface-container-lowest" x-show="mobileOpen" @click.away="mobileOpen = false" x-cloak>
             <div class="px-margin-mobile py-4 space-y-3">
                 <a href="{{ url('/') }}" class="block px-4 py-2.5 rounded-xl font-body-md {{ request()->is('/') ? 'bg-primary text-white' : 'text-on-surface hover:bg-surface-container-low' }}" @click="mobileOpen = false">Home</a>
                 <a href="{{ route('destinasi.index') }}" class="block px-4 py-2.5 rounded-xl font-body-md {{ request()->routeIs('destinasi.*') ? 'bg-primary text-white' : 'text-on-surface hover:bg-surface-container-low' }}" @click="mobileOpen = false">Destinasi</a>

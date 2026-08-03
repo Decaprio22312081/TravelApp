@@ -22,7 +22,7 @@
                     @for($i = 1; $i <= 5; $i++)
                     <label class="cursor-pointer">
                         <input type="radio" name="rating" value="{{ $i }}" class="hidden rating-input" {{ old('rating') == $i ? 'checked' : '' }}>
-                        <i class="fas fa-star text-gray-300 hover:text-yellow-400 rating-star" data-value="{{ $i }}"></i>
+                        <span class="material-symbols-outlined text-4xl text-gray-300 hover:text-yellow-400 rating-star transition-colors" data-value="{{ $i }}" style="font-variation-settings: 'FILL' {{ old('rating') >= $i ? '1' : '0' }};">star</span>
                     </label>
                     @endfor
                 </div>
@@ -36,7 +36,7 @@
             </div>
 
             <button type="submit" class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                <i class="fas fa-paper-plane mr-2"></i>Kirim Ulasan
+                <span class="material-symbols-outlined text-lg mr-2">send</span>Kirim Ulasan
             </button>
         </form>
     </div>
@@ -50,9 +50,11 @@ document.querySelectorAll('.rating-star').forEach(star => {
             if (i < value) {
                 s.classList.remove('text-gray-300');
                 s.classList.add('text-yellow-400');
+                s.style.fontVariationSettings = "'FILL' 1";
             } else {
                 s.classList.remove('text-yellow-400');
                 s.classList.add('text-gray-300');
+                s.style.fontVariationSettings = "'FILL' 0";
             }
         });
         this.closest('label').querySelector('.rating-input').checked = true;

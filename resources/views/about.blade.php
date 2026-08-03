@@ -125,46 +125,17 @@
     </div>
 </section>
 
-{{-- TIM KAMI --}}
+{{-- FOUNDER & CEO --}}
 <section class="py-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-center">
-    <h2 class="font-headline-md text-headline-md text-primary mb-4">Tim Profesional Kami</h2>
-    <p class="text-on-surface-variant mb-12 max-w-2xl mx-auto">Dibalik kenyamanan perjalanan Anda, ada tim berdedikasi yang bekerja sepenuh hati.</p>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+    <h2 class="font-headline-md text-headline-md text-primary mb-4">Founder & CEO</h2>
+    <p class="text-on-surface-variant mb-12 max-w-2xl mx-auto">Di balik kenyamanan perjalanan Anda, ada sosok yang membangun TravelKu dengan sepenuh hati.</p>
+    <div class="mx-auto max-w-sm">
         <div class="group">
-            <div class="relative overflow-hidden rounded-[24px] mb-4 aspect-square bg-surface-container">
-                <div class="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-6xl text-primary/40">person</span>
-                </div>
+            <div class="relative overflow-hidden rounded-[24px] mb-5 aspect-[3/4] bg-surface-container shadow-sm">
+                <img src="{{ asset('images/amay-saputra.jpg') }}" alt="Amay Saputra, Founder & CEO TravelKu" class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105">
             </div>
-            <h4 class="font-bold text-lg text-primary">Andi Saputra</h4>
+            <h4 class="font-bold text-xl text-primary">Amay Saputra</h4>
             <p class="text-label-sm text-on-surface-variant">Founder & CEO</p>
-        </div>
-        <div class="group">
-            <div class="relative overflow-hidden rounded-[24px] mb-4 aspect-square bg-surface-container">
-                <div class="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-6xl text-primary/40">person</span>
-                </div>
-            </div>
-            <h4 class="font-bold text-lg text-primary">Sari Wijaya</h4>
-            <p class="text-label-sm text-on-surface-variant">Operations Manager</p>
-        </div>
-        <div class="group">
-            <div class="relative overflow-hidden rounded-[24px] mb-4 aspect-square bg-surface-container">
-                <div class="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-6xl text-primary/40">person</span>
-                </div>
-            </div>
-            <h4 class="font-bold text-lg text-primary">Budi Santoso</h4>
-            <p class="text-label-sm text-on-surface-variant">Fleet Coordinator</p>
-        </div>
-        <div class="group">
-            <div class="relative overflow-hidden rounded-[24px] mb-4 aspect-square bg-surface-container">
-                <div class="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-6xl text-primary/40">person</span>
-                </div>
-            </div>
-            <h4 class="font-bold text-lg text-primary">Lina Marlina</h4>
-            <p class="text-label-sm text-on-surface-variant">Customer Support</p>
         </div>
     </div>
 </section>
@@ -290,21 +261,6 @@
     }
 </style>
 <script>
-    // Scroll animations
-    const observerOptions = { threshold: 0.1 };
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('opacity-100', 'translate-y-0');
-                entry.target.classList.remove('opacity-0', 'translate-y-10');
-            }
-        });
-    }, observerOptions);
-    document.querySelectorAll('section').forEach(section => {
-        section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
-        observer.observe(section);
-    });
-
     // Map
     document.addEventListener('DOMContentLoaded', function () {
         const mapEl = document.getElementById('map');

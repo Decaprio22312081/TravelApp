@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('ulasan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pemesanan_id')->constrained()->onDelete('cascade');
+            $table->foreignId('pemesanan_id')->constrained('pemesanan')->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('rating')->unsigned();
             $table->text('komentar')->nullable();

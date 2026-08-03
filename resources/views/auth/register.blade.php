@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Register | TravelKu</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <script>
 tailwind.config = {
@@ -14,7 +14,7 @@ tailwind.config = {
     extend: {
       colors: {
         "inverse-surface": "#2e3132",
-        "background": "#f8f9fa",
+        "background": "#f7f6f1",
         "on-secondary": "#ffffff",
         "on-tertiary-container": "#c7d1db",
         "secondary-container": "#8bb4fe",
@@ -45,7 +45,7 @@ tailwind.config = {
         "surface-container-high": "#e7e8e9",
         "surface-container-low": "#f3f4f5",
         "inverse-primary": "#acc7ff",
-        "primary-container": "#0056b3",
+        "primary-container": "#2e6b54",
         "on-tertiary": "#ffffff",
         "on-surface-variant": "#424752",
         "on-error-container": "#93000a",
@@ -56,14 +56,14 @@ tailwind.config = {
         "on-tertiary-fixed-variant": "#3e4850",
         "on-secondary-fixed-variant": "#124589",
         "on-secondary-container": "#0f4487",
-        "primary": "#003f87",
-        "on-surface": "#191c1d",
+        "primary": "#1f4d3d",
+        "on-surface": "#1e2924",
         "surface-container-highest": "#e1e3e4",
         "surface-tint": "#115cb9"
       },
       borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
       spacing: { gutter: "24px", "container-max": "1280px", "margin-mobile": "16px", base: "8px", "margin-desktop": "40px" },
-      fontFamily: { "body-lg": ["Inter"], "body-md": ["Inter"], "label-sm": ["Inter"], "headline-md": ["Montserrat"], "display-lg-mobile": ["Montserrat"], "display-lg": ["Montserrat"] },
+      fontFamily: { "body-lg": ["DM Sans"], "body-md": ["DM Sans"], "label-sm": ["DM Sans"], "headline-md": ["Fraunces"], "display-lg-mobile": ["Fraunces"], "display-lg": ["Fraunces"] },
       fontSize: { "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}], "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "label-sm": ["14px", {"lineHeight": "20px", "fontWeight": "600"}], "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}], "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}], "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}] }
     },
   },
