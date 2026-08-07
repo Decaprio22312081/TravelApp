@@ -11,7 +11,7 @@ class UlasanController extends Controller
 {
     public function create($pemesanan_id)
     {
-        $pemesanan = Pemesanan::with(['mobil', 'destinasi'])->findOrFail($pemesanan_id);
+        $pemesanan = Pemesanan::with(['mobil', 'destinasi', 'paket'])->findOrFail($pemesanan_id);
 
         if ($pemesanan->user_id !== Auth::id()) {
             abort(403);

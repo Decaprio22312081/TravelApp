@@ -9,7 +9,7 @@ class Pemesanan extends Model
     protected $table = 'pemesanan';
 
     protected $fillable = [
-        'user_id', 'mobil_id', 'destinasi_id', 'alamat_jemput', 'alamat_tujuan',
+        'user_id', 'mobil_id', 'paket_id', 'destinasi_id', 'alamat_jemput', 'alamat_tujuan',
         'tanggal_mulai', 'jumlah_hari', 'total_harga', 'nama_penumpang',
         'no_hp_penumpang', 'jumlah_penumpang', 'status',
     ];
@@ -34,6 +34,11 @@ class Pemesanan extends Model
     public function destinasi()
     {
         return $this->belongsTo(Destinasi::class);
+    }
+
+    public function paket()
+    {
+        return $this->belongsTo(Paket::class);
     }
 
     public function pembayaran()

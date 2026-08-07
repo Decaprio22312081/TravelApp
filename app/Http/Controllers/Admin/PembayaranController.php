@@ -11,7 +11,7 @@ class PembayaranController extends Controller
     public function index()
     {
         $pembayarans = Pembayaran::where('status', 'menunggu_verifikasi')
-            ->with(['pemesanan.user', 'pemesanan.mobil'])
+            ->with(['pemesanan.user', 'pemesanan.mobil', 'pemesanan.paket'])
             ->latest()
             ->paginate(15);
 
@@ -20,7 +20,7 @@ class PembayaranController extends Controller
 
     public function show($id)
     {
-        $pembayaran = Pembayaran::with(['pemesanan.user', 'pemesanan.mobil', 'pemesanan.destinasi'])
+        $pembayaran = Pembayaran::with(['pemesanan.user', 'pemesanan.mobil', 'pemesanan.paket', 'pemesanan.destinasi'])
             ->findOrFail($id);
 
         return view('admin.pembayaran.show', compact('pembayaran'));

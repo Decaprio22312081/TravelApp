@@ -22,7 +22,7 @@ class DashboardController extends Controller
             ->take(3)
             ->get();
 
-        $pemesananTerbaru = Pemesanan::with(['user', 'mobil'])
+        $pemesananTerbaru = Pemesanan::with(['user', 'mobil', 'paket'])
             ->latest()
             ->take(5)
             ->get();

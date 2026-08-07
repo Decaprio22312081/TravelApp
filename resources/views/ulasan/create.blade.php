@@ -8,7 +8,7 @@
 
     <div class="bg-white rounded-xl shadow p-6 mb-6">
         <h2 class="font-bold text-gray-700 mb-2">Informasi Pesanan</h2>
-        <p class="text-sm text-gray-600">Mobil: <span class="font-medium text-gray-800">{{ $pemesanan->mobil->nama ?? '-' }}</span></p>
+        <p class="text-sm text-gray-600">{{ $pemesanan->paket ? 'Paket: ' : 'Mobil: ' }}<span class="font-medium text-gray-800">{{ $pemesanan->paket->nama ?? $pemesanan->mobil->nama ?? '-' }}</span></p>
         <p class="text-sm text-gray-600">Tujuan: <span class="font-medium text-gray-800">{{ $pemesanan->alamat_tujuan }}</span></p>
     </div>
 

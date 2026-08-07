@@ -23,7 +23,7 @@
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">User</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Mobil</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Paket / Mobil</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tanggal</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
@@ -35,7 +35,12 @@
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4 text-sm">{{ $loop->iteration }}</td>
                         <td class="px-6 py-4 text-sm">{{ $item->user->name ?? '-' }}</td>
-                        <td class="px-6 py-4 text-sm">{{ $item->mobil->nama ?? '-' }}</td>
+                        <td class="px-6 py-4">
+                            <span class="text-sm text-gray-800">{{ $item->paket->nama ?? $item->mobil->nama ?? '-' }}</span>
+                            @if($item->paket_id)
+                            <span class="block text-xs text-gray-400">{{ $item->mobil->nama ?? '' }}</span>
+                            @endif
+                        </td>
                         <td class="px-6 py-4 text-sm">{{ $item->tanggal_mulai ? \Carbon\Carbon::parse($item->tanggal_mulai)->format('d/m/Y') : '-' }}</td>
                         <td class="px-6 py-4 text-sm">Rp {{ number_format($item->total_harga, 0, ',', '.') }}</td>
                         <td class="px-6 py-4">

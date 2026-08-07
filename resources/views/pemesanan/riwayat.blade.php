@@ -8,7 +8,7 @@
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
             <h2 class="text-headline-md font-headline-md font-bold text-primary mb-1">Riwayat Pemesanan</h2>
-            <p class="text-on-surface-variant">Pantau status penyewaan kendaraan Anda di sini.</p>
+            <p class="text-on-surface-variant">Pantau status paket wisata &amp; penyewaan kendaraan Anda di sini.</p>
         </div>
         <div class="flex items-center gap-2 bg-surface-container-low p-1 rounded-xl border border-outline-variant/30" x-data="{ tab: 'semua' }">
             <button @click="tab = 'semua'" :class="tab === 'semua' ? 'bg-surface-container-lowest text-primary font-bold shadow-sm' : 'text-on-surface-variant'" class="px-6 py-2 rounded-lg transition-all text-body-md">Semua</button>
@@ -60,7 +60,13 @@
                     <div class="flex flex-wrap justify-between items-start mb-4 gap-2">
                         <div>
                             <span class="text-primary font-bold text-sm tracking-wide">#TRV-{{ str_pad($item->id, 5, '0', STR_PAD_LEFT) }}</span>
-                            <h3 class="font-headline-md text-xl font-bold text-on-surface">{{ $item->mobil->nama ?? 'Mobil' }}</h3>
+                            <h3 class="font-headline-md text-xl font-bold text-on-surface">{{ $item->paket->nama ?? $item->mobil->nama ?? 'Perjalanan' }}</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-[11px] font-bold uppercase tracking-wider">
+                                    <span class="material-symbols-outlined text-sm">{{ $item->paket_id ? 'hiking' : 'directions_car' }}</span>
+                                    {{ $item->paket_id ? 'Paket Wisata' : 'Sewa Mobil' }}
+                                </span>
+                            </div>
                             <p class="flex items-center gap-1 text-on-surface-variant text-sm mt-1">
                                 <span class="material-symbols-outlined text-sm">calendar_month</span>
                                 {{ $startDate }}{{ $endDate ? ' - ' . $endDate : '' }}

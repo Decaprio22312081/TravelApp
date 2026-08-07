@@ -1,25 +1,27 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\DestinasiController as AdminDestinasiController;
-use App\Http\Controllers\Admin\MobilController as AdminMobilController;
-use App\Http\Controllers\Admin\PemesananController as AdminPemesananController;
-use App\Http\Controllers\Admin\PembayaranController as AdminPembayaranController;
-use App\Http\Controllers\Admin\UserController as AdminUserController;
-use App\Http\Controllers\Admin\UlasanController as AdminUlasanController;
 use App\Http\Controllers\Admin\LaporanController as AdminLaporanController;
 use App\Http\Controllers\Admin\MitraController as AdminMitraController;
+use App\Http\Controllers\Admin\MobilController as AdminMobilController;
+use App\Http\Controllers\Admin\PaketController as AdminPaketController;
+use App\Http\Controllers\Admin\PembayaranController as AdminPembayaranController;
+use App\Http\Controllers\Admin\PemesananController as AdminPemesananController;
 use App\Http\Controllers\Admin\PengaturanController as AdminPengaturanController;
-use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Admin\UlasanController as AdminUlasanController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DestinasiController;
 use App\Http\Controllers\MobilController;
-use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\UlasanController;
 use App\Models\Destinasi;
 use App\Models\Mobil;
+use App\Models\Paket;
 use App\Models\PromoBanner;
 use App\Models\Setting;
 use App\Models\Ulasan;
@@ -29,9 +31,11 @@ Route::get('/', function () {
     $promos = PromoBanner::where('is_aktif', true)->get();
     $destinasis = Destinasi::latest()->take(6)->get();
     $mobils = Mobil::where('status', 'tersedia')->latest()->take(3)->get();
-    $ulasans = Ulasan::with(['user', 'pemesanan.mobil'])->latest()->take(6)->get();
+    $pakets = Paket::with('destinasi')->where('is_aktif', true)->latest()->take(6)->get();
+    $ulasans = Ulasan::with(['user', 'pemesanan.mobil', 'pemesanan.paket'])->latest()->take(6)->get();
     $settings = Setting::all()->keyBy('key');
-    return view('welcome', compact('promos', 'destinasis', 'mobils', 'ulasans', 'settings'));
+
+    return view('welcome', compact('promos', 'destinasis', 'mobils', 'pakets', 'ulasans', 'settings'));
 });
 
 // About
@@ -71,7 +75,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/pesanan/{id}/batal', [PemesananController::class, 'cancel'])->name('pemesanan.batal');
     Route::get('/riwayat', [PemesananController::class, 'riwayat'])->name('pemesanan.riwayat');
 
-
     // Pembayaran
     Route::get('/pembayaran/{pemesanan_id}', [PembayaranController::class, 'create'])->name('pembayaran.create');
     Route::post('/pembayaran/{pemesanan_id}', [PembayaranController::class, 'store'])->name('pembayaran.store');
@@ -91,6 +94,9 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
 
     // Mobil
     Route::resource('mobil', AdminMobilController::class);
+
+    // Paket Wisata
+    Route::resource('paket', AdminPaketController::class);
 
     // Pemesanan
     Route::get('/pemesanan', [AdminPemesananController::class, 'index'])->name('pemesanan.index');

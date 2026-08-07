@@ -10,7 +10,7 @@ class PemesananController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Pemesanan::with(['user', 'mobil', 'destinasi']);
+        $query = Pemesanan::with(['user', 'mobil', 'destinasi', 'paket']);
 
         if ($request->status) {
             $query->where('status', $request->status);
@@ -23,7 +23,7 @@ class PemesananController extends Controller
 
     public function show($id)
     {
-        $pemesanan = Pemesanan::with(['user', 'mobil', 'destinasi', 'pembayaran', 'ulasan'])
+        $pemesanan = Pemesanan::with(['user', 'mobil', 'destinasi', 'paket', 'pembayaran', 'ulasan'])
             ->findOrFail($id);
 
         return view('admin.pemesanan.show', compact('pemesanan'));
@@ -42,6 +42,6 @@ class PemesananController extends Controller
         ]);
 
         return redirect()->route('admin.pemesanan.show', $pemesanan->id)
-            ->with('success', 'Status pemesanan berhasil diperbarui menjadi ' . $request->status . '.');
+            ->with('success', 'Status pemesanan berhasil diperbarui menjadi '.$request->status.'.');
     }
 }

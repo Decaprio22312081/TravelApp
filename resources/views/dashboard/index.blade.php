@@ -50,7 +50,7 @@
         </div>
         <div class="bg-surface-container-lowest rounded-[24px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-outline-variant/30 grid grid-cols-1 lg:grid-cols-12">
             <div class="lg:col-span-5 relative h-64 lg:h-auto bg-surface-container-low">
-                @php $mobilFoto = $pesananAktifItem->mobil->foto ? asset('storage/' . $pesananAktifItem->mobil->foto) : null; @endphp
+                @php $mobilFoto = ($pesananAktifItem->paket->foto ?? $pesananAktifItem->mobil->foto) ? asset('storage/' . ($pesananAktifItem->paket->foto ?? $pesananAktifItem->mobil->foto)) : null; @endphp
                 @if($mobilFoto)
                 <img class="w-full h-full object-cover" src="{{ $mobilFoto }}" alt="{{ $pesananAktifItem->mobil->nama }}">
                 @else
@@ -67,10 +67,14 @@
             <div class="lg:col-span-7 p-8 flex flex-col justify-center">
                 <div class="flex justify-between items-start mb-6">
                     <div>
-                        <h4 class="text-headline-md font-headline-md text-on-surface mb-1">{{ $pesananAktifItem->mobil->nama ?? 'Mobil' }}</h4>
+                        <h4 class="text-headline-md font-headline-md text-on-surface mb-1">{{ $pesananAktifItem->paket->nama ?? $pesananAktifItem->mobil->nama ?? 'Perjalanan' }}</h4>
                         <p class="text-on-surface-variant flex items-center gap-2 text-sm">
-                            <span class="material-symbols-outlined text-sm">settings_input_component</span>
+                            <span class="material-symbols-outlined text-sm">{{ $pesananAktifItem->paket_id ? 'hiking' : 'settings_input_component' }}</span>
+                            @if($pesananAktifItem->paket_id)
+                            {{ $pesananAktifItem->paket->destinasi->nama ?? $pesananAktifItem->destinasi->nama ?? 'Paket Wisata' }} · {{ $pesananAktifItem->mobil->nama ?? '' }}
+                            @else
                             {{ ucfirst($pesananAktifItem->mobil->tipe ?? 'Manual') }} · {{ $pesananAktifItem->mobil->kapasitas ?? $pesananAktifItem->jumlah_penumpang }} Penumpang
+                            @endif
                         </p>
                     </div>
                     <div class="text-right">

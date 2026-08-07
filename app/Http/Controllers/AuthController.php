@@ -66,6 +66,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect('/');
     }
 
@@ -86,6 +87,7 @@ class AuthController extends Controller
     public function profile()
     {
         $user = Auth::user();
+
         return view('profile.index', compact('user'));
     }
 

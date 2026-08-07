@@ -9,7 +9,7 @@
         <div class="flex items-center w-full max-w-2xl">
             <div class="flex flex-col items-center flex-1">
                 <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold mb-2">1</div>
-                <span class="text-sm font-medium text-on-surface-variant">Pilih Mobil</span>
+                <span class="text-sm font-medium text-on-surface-variant">Pilih Paket / Kendaraan</span>
             </div>
             <div class="h-1 flex-1 bg-primary/20 mx-2 mb-6">
                 <div class="h-full bg-primary w-full"></div>
@@ -50,6 +50,9 @@
                             <div>
                                 <p class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Unit Mobil</p>
                                 <p class="font-bold">{{ $pemesanan->mobil->nama ?? '-' }}</p>
+                                @if($pemesanan->paket)
+                                <p class="text-sm text-on-surface-variant">Paket: <span class="font-semibold text-on-surface">{{ $pemesanan->paket->nama }}</span></p>
+                                @endif
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
@@ -107,7 +110,7 @@
                         @empty
                         <div class="col-span-2 p-5 rounded-xl bg-surface-container-low text-center text-on-surface-variant">
                             <span class="material-symbols-outlined text-3xl mb-2">info</span>
-                            <p>Informasi rekening belum tersedia. Silakan hubungi客服 untuk bantuan.</p>
+                            <p>Informasi rekening belum tersedia. Silakan hubungi kami untuk bantuan.</p>
                         </div>
                         @endforelse
                     </div>

@@ -39,12 +39,20 @@
             </div>
             <div class="p-6 flex flex-col flex-grow">
                 <h3 class="font-headline-md text-headline-md font-bold text-on-surface mb-2">{{ $item->nama }}</h3>
-                <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">{{ Str::limit($item->deskripsi, 120) }}</p>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-3">{{ Str::limit($item->deskripsi, 120) }}</p>
+                @if($item->pakets->isNotEmpty())
+                <div class="flex items-baseline gap-1 mb-6">
+                    <span class="text-label-sm text-on-surface-variant">Mulai dari</span>
+                    <span class="font-display-lg font-extrabold text-primary text-xl">Rp {{ number_format($item->pakets->min('harga'), 0, ',', '.') }}</span>
+                </div>
+                @else
+                <div class="mb-6"></div>
+                @endif
                 <div class="mt-auto flex items-center justify-between">
-                    <a href="{{ route('destinasi.show', $item->id) }}" class="px-6 py-2.5 rounded-lg border-2 border-primary text-primary font-label-sm text-label-sm hover:bg-primary hover:text-white transition-all active:scale-95">Lihat Detail</a>
+                    <a href="{{ route('destinasi.show', $item->id) }}" class="px-6 py-2.5 rounded-lg border-2 border-primary text-primary font-label-sm text-label-sm hover:bg-primary hover:text-white transition-all active:scale-95">Lihat Paket</a>
                     <a href="{{ route('pemesanan.create', ['destinasi_id' => $item->id]) }}" class="px-6 py-2.5 rounded-lg bg-primary text-white font-label-sm text-label-sm hover:bg-primary-container transition-all active:scale-95 flex items-center gap-1">
-                        <span class="material-symbols-outlined text-lg">directions_car</span>
-                        Pesan
+                        <span class="material-symbols-outlined text-lg">hiking</span>
+                        Pesan Wisata
                     </a>
                 </div>
             </div>

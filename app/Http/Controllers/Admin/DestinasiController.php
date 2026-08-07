@@ -12,6 +12,7 @@ class DestinasiController extends Controller
     public function index()
     {
         $destinasi = Destinasi::latest()->paginate(10);
+
         return view('admin.destinasi.index', compact('destinasi'));
     }
 
@@ -44,6 +45,7 @@ class DestinasiController extends Controller
     public function edit($id)
     {
         $destinasi = Destinasi::findOrFail($id);
+
         return view('admin.destinasi.edit', compact('destinasi'));
     }
 

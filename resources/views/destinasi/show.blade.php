@@ -19,6 +19,9 @@
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end px-margin-mobile md:px-margin-desktop">
             <div class="flex items-center gap-3 mb-4">
                 <span class="bg-primary text-white px-4 py-1.5 rounded-full text-label-sm font-label-sm uppercase tracking-wider">{{ $destinasi->kategori }}</span>
+                @if($pakets->isNotEmpty())
+                <span class="bg-white/20 backdrop-blur text-white px-4 py-1.5 rounded-full text-label-sm font-label-sm">{{ $pakets->count() }} Paket Wisata</span>
+                @endif
             </div>
             <h1 class="text-white font-display-lg text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">{{ $destinasi->nama }}</h1>
         </div>
@@ -32,6 +35,78 @@
             <section class="mb-16">
                 <h2 class="font-headline-md text-2xl font-bold text-primary mb-6">Tentang {{ $destinasi->nama }}</h2>
                 <p class="font-body-lg text-on-surface-variant leading-relaxed">{{ $destinasi->deskripsi }}</p>
+            </section>
+
+            {{-- PACKAGES --}}
+            <section class="mb-16" id="paket">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="font-headline-md text-2xl font-bold text-primary">Paket Wisata</h2>
+                    <span class="text-label-sm text-on-surface-variant">Harga paket per perjalanan</span>
+                </div>
+
+                @forelse($pakets as $paket)
+                <article class="bg-white rounded-3xl border border-surface-variant editorial-shadow overflow-hidden mb-6 group hover:border-primary/30 transition-all">
+                    <div class="grid grid-cols-1 md:grid-cols-12">
+                        <div class="md:col-span-4 relative h-52 md:h-auto overflow-hidden bg-surface-container-low">
+                            @if($paket->foto)
+                            <img src="{{ asset('storage/'.$paket->foto) }}" alt="{{ $paket->nama }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            @else
+                            <div class="w-full h-full flex items-center justify-center">
+                                <span class="material-symbols-outlined text-outline text-6xl">hiking</span>
+                            </div>
+                            @endif
+                            <div class="absolute top-4 left-4 bg-primary/90 text-white px-3 py-1 rounded-full text-label-sm font-label-sm backdrop-blur-md">
+                                {{ $paket->durasi_hari }} Hari {{ $paket->durasi_hari > 1 ? $paket->durasi_hari - 1 . ' Malam' : '' }}
+                            </div>
+                        </div>
+                        <div class="md:col-span-8 p-6 md:p-8 flex flex-col">
+                            <div class="flex flex-wrap items-start justify-between gap-4 mb-3">
+                                <h3 class="font-headline-md text-headline-md font-bold text-on-surface">{{ $paket->nama }}</h3>
+                                <div class="text-right">
+                                    <p class="text-label-sm text-on-surface-variant">Mulai dari</p>
+                                    <p class="font-display-lg font-extrabold text-primary text-2xl">Rp {{ number_format($paket->harga, 0, ',', '.') }}</p>
+                                </div>
+                            </div>
+                            <p class="font-body-md text-on-surface-variant mb-5">{{ $paket->deskripsi }}</p>
+
+                            @if($paket->fasilitasList())
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                @foreach(array_slice($paket->fasilitasList(), 0, 4) as $f)
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-label-sm font-label-sm">
+                                    <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    {{ $f }}
+                                </span>
+                                @endforeach
+                                @if(count($paket->fasilitasList()) > 4)
+                                <span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant text-label-sm font-label-sm">+{{ count($paket->fasilitasList()) - 4 }} lainnya</span>
+                                @endif
+                            </div>
+                            @endif
+
+                            <div class="mt-auto flex flex-wrap items-center justify-between gap-4">
+                                <a href="{{ route('pemesanan.create', ['paket_id' => $paket->id]) }}" class="px-8 py-3 rounded-xl bg-primary text-white font-label-sm text-label-sm hover:bg-primary-container transition-all active:scale-95 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                                    Pilih Paket Ini
+                                </a>
+                                <span class="text-label-sm text-on-surface-variant flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-[18px] text-primary">verified</span>
+                                    Termasuk mobil + supir
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                @empty
+                <div class="bg-surface-container-low rounded-3xl border border-dashed border-outline p-10 text-center">
+                    <span class="material-symbols-outlined text-5xl text-outline mb-4 block">explore_off</span>
+                    <h3 class="font-headline-md font-bold text-on-surface mb-2">Belum ada paket wisata</h3>
+                    <p class="text-on-surface-variant font-body-md mb-6">Hubungi kami untuk merancang perjalanan custom ke {{ $destinasi->nama }}.</p>
+                    <a href="{{ route('pemesanan.create', ['destinasi_id' => $destinasi->id]) }}" class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-primary-container transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-lg">hiking</span>
+                        Buat Perjalanan Custom
+                    </a>
+                </div>
+                @endforelse
             </section>
 
             {{-- Gallery --}}
@@ -96,43 +171,39 @@
         {{-- RIGHT: Sticky Sidebar --}}
         <div class="lg:col-span-4">
             <aside class="sticky top-28 bg-white rounded-3xl p-8 border border-surface-variant editorial-shadow space-y-8">
-                @php $mobil = $mobils->first(); @endphp
-                @if($mobil)
+                @if($pakets->isNotEmpty())
                 <div>
-                    <span class="font-label-sm text-on-surface-variant block mb-1">Mulai dari</span>
+                    <span class="font-label-sm text-on-surface-variant block mb-1">Paket termurah mulai dari</span>
                     <div class="flex items-baseline gap-1">
-                        <span class="text-headline-md text-3xl font-extrabold text-primary">Rp {{ number_format($mobil->harga_per_hari, 0, ',', '.') }}</span>
-                        <span class="text-on-surface-variant text-sm font-body-md">/ hari</span>
+                        <span class="text-headline-md text-3xl font-extrabold text-primary">Rp {{ number_format($pakets->min('harga'), 0, ',', '.') }}</span>
                     </div>
+                    <p class="text-on-surface-variant text-sm font-body-md mt-1">per perjalanan, termasuk kendaraan</p>
                 </div>
+                <a href="#paket" class="block w-full bg-primary text-white text-center py-4 rounded-2xl font-bold text-lg hover:bg-primary-container transition-all active:scale-[0.98] font-display-lg">
+                    Lihat Paket Wisata
+                </a>
                 @endif
 
                 <div class="space-y-4">
                     <div class="flex items-center gap-3 font-body-md">
-                        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">directions_car</span>
-                        <span>Mobil dengan Supir Profesional</span>
+                        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">tour</span>
+                        <span>Paket wisata lengkap &amp; terorganisir</span>
                     </div>
                     <div class="flex items-center gap-3 font-body-md">
-                        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">local_gas_station</span>
-                        <span>Bahan Bakar Termasuk</span>
+                        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+                        <span>Kendaraan + Supir Profesional</span>
                     </div>
                     <div class="flex items-center gap-3 font-body-md">
                         <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
-                        <span>Asuransi Perjalanan</span>
+                        <span>Konfirmasi instan via WhatsApp</span>
                     </div>
-                </div>
-
-                <div class="pt-4 space-y-3">
-                    <a href="{{ route('pemesanan.create', ['destinasi_id' => $destinasi->id]) }}" class="block w-full bg-primary text-white text-center py-4 rounded-2xl font-bold text-lg hover:bg-primary-container transition-all active:scale-[0.98] font-display-lg">
-                        Pesan Travel ke Sini
-                    </a>
-                    <p class="text-center text-label-sm text-on-surface-variant">Konfirmasi instan via WhatsApp</p>
                 </div>
 
                 @if($mobils->count() > 0)
                 <hr class="border-surface-variant">
                 <div>
-                    <h4 class="font-headline-md font-bold text-primary mb-4">Armada Tersedia</h4>
+                    <h4 class="font-headline-md font-bold text-primary mb-2">Kendaraan Pendukung</h4>
+                    <p class="text-sm text-on-surface-variant font-body-md mb-4">Butuh sewa mobil terpisah?</p>
                     <div class="space-y-3">
                         @foreach($mobils as $m)
                         <div class="flex items-center justify-between py-3 border-b border-surface-variant last:border-0">
@@ -144,6 +215,9 @@
                         </div>
                         @endforeach
                     </div>
+                    <a href="{{ route('mobil.index') }}" class="mt-4 block w-full border-2 border-primary text-primary text-center py-3 rounded-2xl font-bold hover:bg-primary hover:text-white transition-all active:scale-[0.98]">
+                        Lihat Armada Sewa
+                    </a>
                 </div>
                 @endif
             </aside>

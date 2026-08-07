@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Wisata Bandar Lampung - Premium Car Rental')</title>
+    <title>@yield('title', 'Wisata &amp; Rental Mobil Bandar Lampung')</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,6 +33,23 @@
                         'outline': '#7a837d',
                         'outline-variant': '#d1d2c9',
                         'on-tertiary-fixed': '#18261f',
+                        'surface-variant': '#dfded6',
+                        'primary-fixed': '#dbeadf',
+                        'primary-fixed-dim': '#b9d2c4',
+                        'on-primary-fixed': '#123126',
+                        'on-primary-fixed-variant': '#1f4d3d',
+                        'secondary-container': '#f7e2c3',
+                        'on-secondary-container': '#6b3f14',
+                        'on-secondary-fixed': '#4a2c10',
+                        'on-secondary-fixed-variant': '#5c3a18',
+                        'tertiary': '#2e6b54',
+                        'on-tertiary': '#ffffff',
+                        'tertiary-container': '#cfe9dd',
+                        'on-tertiary-container': '#16382c',
+                        'error': '#ba1a1a',
+                        'on-error': '#ffffff',
+                        'error-container': '#ffdad6',
+                        'on-error-container': '#93000a',
                     },
                     borderRadius: {
                         '2xl': '0.875rem',
@@ -45,6 +62,15 @@
                         'body-lg': ['DM Sans', 'sans-serif'],
                         'body-md': ['DM Sans', 'sans-serif'],
                         'label-sm': ['DM Sans', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'display-lg': ['32px', { lineHeight: '40px', letterSpacing: '-0.02em', fontWeight: '700' }],
+                        'headline-md': ['24px', { lineHeight: '32px', fontWeight: '600' }],
+                        'title-sm': ['18px', { lineHeight: '24px', fontWeight: '600' }],
+                        'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+                        'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }],
+                        'label-sm': ['12px', { lineHeight: '16px', fontWeight: '500' }],
+                        'label-caps': ['12px', { lineHeight: '16px', letterSpacing: '0.05em', fontWeight: '700' }],
                     },
                     maxWidth: {
                         'container-max': '1280px',
@@ -85,7 +111,7 @@
     <header class="fixed top-0 w-full z-50 glass-nav" x-data="{ mobileOpen: false }">
         <nav class="flex items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
             <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+                <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">explore</span>
                 <a href="{{ url('/') }}" class="font-display-lg text-xl font-bold text-primary">Afia Jaya Abadi</a>
             </div>
             <div class="flex items-center gap-6 ml-auto">
@@ -196,7 +222,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
             <div class="space-y-5">
                 <div class="flex items-center gap-2">
-                    <span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+                    <span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: 'FILL' 1;">explore</span>
                     <h3 class="font-display-lg text-xl font-bold text-white">Cv.Afia Jaya Abadi</h3>
                 </div>
                 <p class="text-surface-container-low font-body-md opacity-80 leading-relaxed">Perjalanan menjadi lebih mudah bersama layanan travel 

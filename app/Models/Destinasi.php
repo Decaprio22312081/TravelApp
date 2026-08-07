@@ -16,4 +16,9 @@ class Destinasi extends Model
     {
         return $this->hasMany(Pemesanan::class);
     }
+
+    public function pakets()
+    {
+        return $this->hasMany(Paket::class);
+    }
 }

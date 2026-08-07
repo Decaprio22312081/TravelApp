@@ -12,6 +12,7 @@ class MitraController extends Controller
     public function index()
     {
         $mitras = Mitra::latest()->get();
+
         return view('admin.mitra.index', compact('mitras'));
     }
 
@@ -48,6 +49,7 @@ class MitraController extends Controller
     public function edit($id)
     {
         $mitra = Mitra::findOrFail($id);
+
         return view('admin.mitra.edit', compact('mitra'));
     }
 

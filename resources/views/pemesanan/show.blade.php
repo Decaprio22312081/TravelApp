@@ -37,26 +37,49 @@
         'icon' => 'info',
         'label' => $pemesanan->status,
     ];
-    $infoItems = [
-        ['icon' => 'directions_car', 'label' => 'Mobil', 'value' => $pemesanan->mobil->nama ?? '-'],
-        ['icon' => 'route', 'label' => 'Tujuan', 'value' => $pemesanan->destinasi->nama ?? $pemesanan->alamat_tujuan],
-        [
-            'icon' => 'location_on',
-            'label' => 'Alamat Jemput',
-            'value' => $pemesanan->alamat_jemput ?? '-',
-            'full' => true,
-        ],
-        [
-            'icon' => 'calendar_today',
-            'label' => 'Tanggal Mulai',
-            'value' => $pemesanan->tanggal_mulai
-                ? \Carbon\Carbon::parse($pemesanan->tanggal_mulai)->format('d F Y')
-                : '-',
-        ],
-        ['icon' => 'schedule', 'label' => 'Durasi', 'value' => $pemesanan->jumlah_hari . ' Hari'],
-        ['icon' => 'groups', 'label' => 'Penumpang', 'value' => $pemesanan->jumlah_penumpang . ' Orang'],
-    ];
-@endphp
+    @php
+        $isPaket = (bool) $pemesanan->paket_id;
+        $infoItems = $isPaket
+            ? [
+                ['icon' => 'hiking', 'label' => 'Paket Wisata', 'value' => $pemesanan->paket->nama ?? '-'],
+                ['icon' => 'directions_car', 'label' => 'Kendaraan', 'value' => $pemesanan->mobil->nama ?? '-'],
+                ['icon' => 'route', 'label' => 'Tujuan', 'value' => $pemesanan->destinasi->nama ?? $pemesanan->alamat_tujuan],
+                [
+                    'icon' => 'location_on',
+                    'label' => 'Alamat Jemput',
+                    'value' => $pemesanan->alamat_jemput ?? '-',
+                    'full' => true,
+                ],
+                [
+                    'icon' => 'calendar_today',
+                    'label' => 'Tanggal Berangkat',
+                    'value' => $pemesanan->tanggal_mulai
+                        ? \Carbon\Carbon::parse($pemesanan->tanggal_mulai)->format('d F Y')
+                        : '-',
+                ],
+                ['icon' => 'schedule', 'label' => 'Durasi', 'value' => $pemesanan->jumlah_hari . ' Hari'],
+                ['icon' => 'groups', 'label' => 'Peserta', 'value' => $pemesanan->jumlah_penumpang . ' Orang'],
+            ]
+            : [
+                ['icon' => 'directions_car', 'label' => 'Mobil', 'value' => $pemesanan->mobil->nama ?? '-'],
+                ['icon' => 'route', 'label' => 'Tujuan', 'value' => $pemesanan->destinasi->nama ?? $pemesanan->alamat_tujuan],
+                [
+                    'icon' => 'location_on',
+                    'label' => 'Alamat Jemput',
+                    'value' => $pemesanan->alamat_jemput ?? '-',
+                    'full' => true,
+                ],
+                [
+                    'icon' => 'calendar_today',
+                    'label' => 'Tanggal Mulai',
+                    'value' => $pemesanan->tanggal_mulai
+                        ? \Carbon\Carbon::parse($pemesanan->tanggal_mulai)->format('d F Y')
+                        : '-',
+                ],
+                ['icon' => 'schedule', 'label' => 'Durasi', 'value' => $pemesanan->jumlah_hari . ' Hari'],
+                ['icon' => 'groups', 'label' => 'Penumpang', 'value' => $pemesanan->jumlah_penumpang . ' Orang'],
+            ];
+    @endphp
 
 @section('content')
     <main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 pt-28">
@@ -144,15 +167,25 @@
                         <h3 class="font-headline-md">Rincian Biaya</h3>
                     </div>
                     <div class="space-y-4 mb-8">
+                        @if($isPaket)
+                        <div class="flex justify-between items-center text-on-surface-variant">
+                            <span class="font-body-md">Harga Paket Wisata</span>
+                            <span class="font-body-md">Rp {{ number_format($pemesanan->paket->harga ?? 0, 0, ',', '.') }}</span>
+                        </div>
+                        <div class="flex justify-between items-center text-on-surface-variant">
+                            <span class="font-body-md">Kendaraan + Supir ({{ $pemesanan->jumlah_hari }} hari)</span>
+                            <span class="font-body-md">Rp {{ number_format(($pemesanan->mobil->harga_per_hari ?? 0) * $pemesanan->jumlah_hari, 0, ',', '.') }}</span>
+                        </div>
+                        @else
                         <div class="flex justify-between items-center text-on-surface-variant">
                             <span class="font-body-md">Harga per Hari</span>
-                            <span class="font-body-md">Rp
-                                {{ number_format($pemesanan->mobil->harga_per_hari ?? 0, 0, ',', '.') }}</span>
+                            <span class="font-body-md">Rp {{ number_format($pemesanan->mobil->harga_per_hari ?? 0, 0, ',', '.') }}</span>
                         </div>
                         <div class="flex justify-between items-center text-on-surface-variant">
                             <span class="font-body-md">Jumlah Hari</span>
                             <span class="font-body-md">{{ $pemesanan->jumlah_hari }}x</span>
                         </div>
+                        @endif
                         <div class="pt-4 border-t border-outline-variant/50 flex justify-between items-center">
                             <span class="font-headline-md text-on-surface">Total</span>
                             <span class="text-headline-md font-bold text-primary">Rp

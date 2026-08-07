@@ -139,7 +139,7 @@
                     <tr class="bg-surface-container/50 border-b border-outline-variant">
                         <th class="px-8 py-4 text-label-caps text-on-surface-variant">ID</th>
                         <th class="px-8 py-4 text-label-caps text-on-surface-variant">Customer</th>
-                        <th class="px-8 py-4 text-label-caps text-on-surface-variant">Car</th>
+                        <th class="px-8 py-4 text-label-caps text-on-surface-variant">Paket / Car</th>
                         <th class="px-8 py-4 text-label-caps text-on-surface-variant">Date</th>
                         <th class="px-8 py-4 text-label-caps text-on-surface-variant">Status</th>
                         <th class="px-8 py-4 text-label-caps text-on-surface-variant text-right">Actions</th>
@@ -157,7 +157,7 @@
                                 <span class="text-sm font-medium text-on-background">{{ $item->user->name ?? '-' }}</span>
                             </div>
                         </td>
-                        <td class="px-8 py-4 text-sm text-on-surface-variant">{{ $item->mobil->nama ?? '-' }}</td>
+                        <td class="px-8 py-4 text-sm text-on-surface-variant">{{ $item->paket->nama ?? $item->mobil->nama ?? '-' }}</td>
                         <td class="px-8 py-4 text-sm text-on-surface-variant">{{ $item->created_at->format('d M Y') }}</td>
                         <td class="px-8 py-4">
                             @php

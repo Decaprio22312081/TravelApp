@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BankAccount;
 use App\Models\Pembayaran;
 use App\Models\Pemesanan;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +13,7 @@ class PembayaranController extends Controller
 {
     public function create($pemesanan_id)
     {
-        $pemesanan = Pemesanan::with(['mobil', 'destinasi'])->findOrFail($pemesanan_id);
+        $pemesanan = Pemesanan::with(['mobil', 'destinasi', 'paket'])->findOrFail($pemesanan_id);
 
         if ($pemesanan->user_id !== Auth::id()) {
             abort(403);
@@ -24,7 +25,7 @@ class PembayaranController extends Controller
         }
 
         $bankAccounts = BankAccount::where('is_aktif', true)->get();
-        $settingTelpon = \App\Models\Setting::where('key', 'no_telp')->first();
+        $settingTelpon = Setting::where('key', 'no_telp')->first();
         $noTelp = $settingTelpon ? $settingTelpon->value : '-';
         $instruksiTransfer = BankAccount::where('is_aktif', true)->get();
 
@@ -68,11 +69,11 @@ class PembayaranController extends Controller
     {
         $pemesanan = Pemesanan::with(['pembayaran'])->findOrFail($pemesanan_id);
 
-        if ($pemesanan->user_id !== Auth::id() && !Auth::user()->isAdmin()) {
+        if ($pemesanan->user_id !== Auth::id() && ! Auth::user()->isAdmin()) {
             abort(403);
         }
 
-        if (!$pemesanan->pembayaran) {
+        if (! $pemesanan->pembayaran) {
             return redirect()->route('pemesanan.show', $pemesanan->id)
                 ->with('error', 'Belum ada pembayaran untuk pemesanan ini.');
         }

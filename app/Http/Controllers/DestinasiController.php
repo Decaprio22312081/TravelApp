@@ -10,11 +10,11 @@ class DestinasiController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Destinasi::query();
+        $query = Destinasi::query()->with(['pakets' => fn ($q) => $q->where('is_aktif', true)]);
 
         if ($request->filled('search')) {
-            $query->where('nama', 'like', '%' . $request->search . '%')
-                  ->orWhere('deskripsi', 'like', '%' . $request->search . '%');
+            $query->where('nama', 'like', '%'.$request->search.'%')
+                ->orWhere('deskripsi', 'like', '%'.$request->search.'%');
         }
 
         if ($request->filled('kategori')) {
@@ -38,14 +38,20 @@ class DestinasiController extends Controller
             ->pluck('ulasan')
             ->filter();
 
+        $pakets = $destinasi->pakets()
+            ->where('is_aktif', true)
+            ->latest()
+            ->get();
+
         $mobils = Mobil::where('status', 'tersedia')->latest()->take(3)->get();
 
-        return view('destinasi.show', compact('destinasi', 'ulasans', 'mobils'));
+        return view('destinasi.show', compact('destinasi', 'ulasans', 'mobils', 'pakets'));
     }
 
     public function getByDestinasi($id)
     {
         $destinasi = Destinasi::findOrFail($id);
+
         return redirect()->route('pemesanan.create', ['destinasi_id' => $destinasi->id]);
     }
 }

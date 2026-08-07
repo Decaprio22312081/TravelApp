@@ -6,6 +6,7 @@ use App\Models\BankAccount;
 use App\Models\Destinasi;
 use App\Models\Mitra;
 use App\Models\Mobil;
+use App\Models\Paket;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -201,5 +202,70 @@ class DatabaseSeeder extends Seeder
         Setting::create(['key' => 'facebook', 'value' => 'travelkulanteng']);
         Setting::create(['key' => 'instagram', 'value' => '@travelku_lampung']);
         Setting::create(['key' => 'tentang_kami', 'value' => 'TravelKu adalah layanan travel dan rental mobil dengan supir profesional yang telah melayani masyarakat Bandar Lampung dan sekitarnya sejak 2020. Kami berkomitmen memberikan pengalaman perjalanan yang nyaman, aman, dan terjangkau.\n\nDengan armada mobil yang terawat dan supir yang berpengalaman serta menguasai rute di seluruh provinsi Lampung, TravelKu menjadi pilihan tepat untuk perjalanan wisata, dinas, atau antar jemput.\n\nVisi kami menjadi layanan travel terdepan di Lampung yang mengutamakan kepuasan dan kenyamanan pelanggan. Misi kami menyediakan transportasi berkualitas dengan harga bersahabat, didukung oleh sumber daya profesional dan armada yang selalu prima.']);
+
+        $paketData = [
+            [
+                'destinasi' => 'Pantai Tanjung Setia',
+                'nama' => 'Paket Pesona Tanjung Setia',
+                'deskripsi' => 'Nikmati keindahan pantai eksotis dengan ombak kelas dunia. Cocok untuk liburan keluarga maupun pecinta selancar.',
+                'durasi_hari' => 2,
+                'harga' => 1500000,
+                'fasilitas' => "Transportasi mobil + supir\nTour guide lokal\nTiket masuk wisata\nPenginapan 1 malam\nSarapan pagi\nDokumentasi foto",
+                'itinerary' => "Hari 1: Penjemputan di titik jemput\nHari 1: Tiba di Pantai Tanjung Setia, check-in penginapan\nHari 2: Sunrise & bebas berenang/selancar\nHari 2: Kembali ke Bandar Lampung",
+            ],
+            [
+                'destinasi' => 'Pantai Tanjung Setia',
+                'nama' => 'Paket Eksplorasi Pantai Barat',
+                'deskripsi' => 'Jelajahi dua pantai terindah di pesisir barat Lampung dalam satu perjalanan seru.',
+                'durasi_hari' => 3,
+                'harga' => 2200000,
+                'fasilitas' => "Transportasi mobil + supir\nTour guide berpengalaman\nTiket masuk wisata\nPenginapan 2 malam\nMakan 3x sehari\nAsuransi perjalanan",
+                'itinerary' => "Hari 1: Penjemputan & perjalanan ke pantai barat\nHari 2: Pantai Tanjung Setia & area sekitar\nHari 3: Free time pagi, kembali ke Bandar Lampung",
+            ],
+            [
+                'destinasi' => 'Tanggamus',
+                'nama' => 'Paket Gunung Tanggamus',
+                'deskripsi' => 'Trekking ke Gunung Tanggamus dengan pemandangan alam yang memukau dan udara segar pegunungan.',
+                'durasi_hari' => 2,
+                'harga' => 1200000,
+                'fasilitas' => "Transportasi mobil + supir\nPorter lokal\nTiket masuk kawasan\nTenda & perlengkapan camping\nMakan selama perjalanan",
+                'itinerary' => "Hari 1: Perjalanan ke basecamp Tanggamus\nHari 1: Setup camp & api unggun\nHari 2: Trekking pagi, kembali ke Bandar Lampung",
+            ],
+            [
+                'destinasi' => 'Pulau Pahawang',
+                'nama' => 'Paket Snorkeling Pahawang',
+                'deskripsi' => 'Snorkeling dan diving di keindahan bawah laut Pulau Pahawang yang memukau.',
+                'durasi_hari' => 2,
+                'harga' => 1750000,
+                'fasilitas' => "Transportasi mobil + supir\nPerahu menuju pulau\nPeralatan snorkeling\nTour guide lokal\nMakan laut segar\nPenginapan homestay",
+                'itinerary' => "Hari 1: Menuju dermaga & naik perahu ke Pahawang\nHari 1: Snorkeling sore di spot indah\nHari 2: Snorkeling pagi & kembali ke Bandar Lampung",
+            ],
+            [
+                'destinasi' => 'Lampung Walk',
+                'nama' => 'Paket Kuliner Kota',
+                'deskripsi' => 'Wisata kuliner menyusuri pusat Kota Bandar Lampung dengan berbagai pilihan makanan khas.',
+                'durasi_hari' => 1,
+                'harga' => 450000,
+                'fasilitas' => "Transportasi mobil + supir\nTour guide kuliner\nFood tasting 5 spot\nMinuman lokal\nDokumentasi foto",
+                'itinerary' => "Hari 1: Mulai dari Lampung Walk\nHari 1: Jelajah kuliner Pahoman & sekitarnya\nHari 1: Antarkata jemput kembali",
+            ],
+        ];
+
+        foreach ($paketData as $p) {
+            $destinasi = Destinasi::where('nama', $p['destinasi'])->first();
+
+            if ($destinasi) {
+                Paket::create([
+                    'destinasi_id' => $destinasi->id,
+                    'nama' => $p['nama'],
+                    'deskripsi' => $p['deskripsi'],
+                    'durasi_hari' => $p['durasi_hari'],
+                    'harga' => $p['harga'],
+                    'fasilitas' => $p['fasilitas'],
+                    'itinerary' => $p['itinerary'],
+                    'is_aktif' => true,
+                ]);
+            }
+        }
     }
 }

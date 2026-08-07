@@ -126,6 +126,10 @@
                 <span class="material-symbols-outlined">directions_car</span>
                 <span class="text-label-caps">Mobil &amp; Supir</span>
             </a>
+            <a href="{{ route('admin.paket.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('admin.paket.*') ? 'bg-on-secondary-fixed-variant text-surface-container-lowest border-l-4 border-primary-fixed' : 'text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-bright' }}">
+                <span class="material-symbols-outlined">hiking</span>
+                <span class="text-label-caps">Paket Wisata</span>
+            </a>
             <a href="{{ route('admin.pemesanan.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 {{ request()->routeIs('admin.pemesanan.*') ? 'bg-on-secondary-fixed-variant text-surface-container-lowest border-l-4 border-primary-fixed' : 'text-secondary-fixed-dim hover:bg-on-secondary-fixed-variant hover:text-surface-bright' }}">
                 <span class="material-symbols-outlined">receipt_long</span>
                 <span class="text-label-caps">Pemesanan</span>

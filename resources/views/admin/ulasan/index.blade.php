@@ -24,7 +24,7 @@
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4 text-sm">{{ $loop->iteration }}</td>
                         <td class="px-6 py-4 text-sm">{{ $item->pemesanan->user->name ?? '-' }}</td>
-                        <td class="px-6 py-4 text-sm">{{ $item->pemesanan->mobil->nama ?? '-' }}</td>
+                        <td class="px-6 py-4 text-sm">{{ $item->pemesanan->paket->nama ?? $item->pemesanan->mobil->nama ?? '-' }}</td>
                         <td class="px-6 py-4">
                             <div class="flex text-yellow-400 text-sm">
                                 @for($i = 1; $i <= 5; $i++)

@@ -45,7 +45,7 @@
                 <table class="w-full text-sm">
                     <tr class="border-b"><td class="py-2 text-gray-500">ID Pesanan</td><td class="py-2 text-gray-800">#{{ $pembayaran->pemesanan->id }}</td></tr>
                     <tr class="border-b"><td class="py-2 text-gray-500">User</td><td class="py-2 text-gray-800">{{ $pembayaran->pemesanan->user->name ?? '-' }}</td></tr>
-                    <tr class="border-b"><td class="py-2 text-gray-500">Mobil</td><td class="py-2 text-gray-800">{{ $pembayaran->pemesanan->mobil->nama ?? '-' }}</td></tr>
+                    <tr class="border-b"><td class="py-2 text-gray-500">Paket / Mobil</td><td class="py-2 text-gray-800">{{ $pembayaran->pemesanan->paket->nama ?? $pembayaran->pemesanan->mobil->nama ?? '-' }}</td></tr>
                     <tr class="border-b"><td class="py-2 text-gray-500">Total Pesanan</td><td class="py-2 text-gray-800">Rp {{ number_format($pembayaran->pemesanan->total_harga, 0, ',', '.') }}</td></tr>
                 </table>
                 @endif

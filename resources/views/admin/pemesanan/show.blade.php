@@ -22,6 +22,10 @@
                     <h3 class="font-bold text-gray-700 mb-3">Informasi Pesanan</h3>
                     <table class="w-full text-sm">
                         <tr class="border-b"><td class="py-2 text-gray-500">User</td><td class="py-2 text-gray-800">{{ $pemesanan->user->name ?? '-' }} ({{ $pemesanan->user->email ?? '-' }})</td></tr>
+                        <tr class="border-b"><td class="py-2 text-gray-500">Jenis</td><td class="py-2 text-gray-800">{{ $pemesanan->paket_id ? 'Paket Wisata' : 'Sewa Mobil' }}</td></tr>
+                        @if($pemesanan->paket_id)
+                        <tr class="border-b"><td class="py-2 text-gray-500">Paket</td><td class="py-2 text-gray-800">{{ $pemesanan->paket->nama ?? '-' }}</td></tr>
+                        @endif
                         <tr class="border-b"><td class="py-2 text-gray-500">Mobil</td><td class="py-2 text-gray-800">{{ $pemesanan->mobil->nama ?? '-' }} ({{ $pemesanan->mobil->plat_nomor ?? '-' }})</td></tr>
                         <tr class="border-b"><td class="py-2 text-gray-500">Supir</td><td class="py-2 text-gray-800">{{ $pemesanan->mobil->nama_supir ?? '-' }}</td></tr>
                         <tr class="border-b"><td class="py-2 text-gray-500">Alamat Jemput</td><td class="py-2 text-gray-800">{{ $pemesanan->alamat_jemput }}</td></tr>

@@ -12,6 +12,7 @@ class MobilController extends Controller
     public function index()
     {
         $mobil = Mobil::latest()->paginate(10);
+
         return view('admin.mobil.index', compact('mobil'));
     }
 
@@ -54,6 +55,7 @@ class MobilController extends Controller
     public function edit($id)
     {
         $mobil = Mobil::findOrFail($id);
+
         return view('admin.mobil.edit', compact('mobil'));
     }
 
@@ -65,7 +67,7 @@ class MobilController extends Controller
             'nama' => 'required|string|max:255',
             'merk' => 'required|string|max:255',
             'tipe' => 'required|string|max:255',
-            'plat_nomor' => 'required|string|max:20|unique:mobil,plat_nomor,' . $id,
+            'plat_nomor' => 'required|string|max:20|unique:mobil,plat_nomor,'.$id,
             'kapasitas' => 'required|integer|min:1',
             'harga_per_hari' => 'required|numeric|min:0',
             'fasilitas' => 'nullable|string',

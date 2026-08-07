@@ -26,7 +26,7 @@ class DashboardController extends Controller
         $totalBiaya = $user->pemesanans()->sum('total_harga');
 
         $pesananAktifItem = $user->pemesanans()
-            ->with(['mobil', 'destinasi'])
+            ->with(['mobil', 'paket', 'destinasi'])
             ->whereIn('status', ['berjalan', 'dikonfirmasi', 'menunggu_verifikasi', 'menunggu_pembayaran'])
             ->latest()
             ->first();
@@ -34,7 +34,7 @@ class DashboardController extends Controller
         $destinasiPopuler = Destinasi::inRandomOrder()->take(4)->get();
 
         $pesananTerbaru = $user->pemesanans()
-            ->with(['mobil', 'destinasi'])
+            ->with(['mobil', 'paket', 'destinasi'])
             ->latest()
             ->take(5)
             ->get();
