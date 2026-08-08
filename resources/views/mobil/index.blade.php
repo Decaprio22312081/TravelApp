@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Pilih Mobil & Supir - TravelKu')
+@section('title', 'Pilih Mobil & Supir - CV. Afia Jaya Abadi')
 
 @section('content')
 {{-- PAGE HEADER --}}
 <section class="bg-surface-container-low pt-28 pb-12 md:pt-32 md:pb-16">
     <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        <span class="text-primary font-bold tracking-widest uppercase text-sm font-label-sm mb-2 block">CV. Afia Jaya Abadi</span>
         <h1 class="font-display-lg text-4xl md:text-5xl font-bold text-primary mb-2">Pilih Mobil & Supir</h1>
         <p class="font-body-lg text-on-surface-variant">Temukan armada terbaik untuk perjalanan Anda di Lampung</p>
     </div>

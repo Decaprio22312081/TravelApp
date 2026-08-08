@@ -112,7 +112,7 @@
         <nav class="flex items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
             <div class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">explore</span>
-                <a href="{{ url('/') }}" class="font-display-lg text-xl font-bold text-primary">Afia Jaya Abadi</a>
+                <a href="{{ url('/') }}" class="font-display-lg text-xl font-bold text-primary">CV. Afia Jaya Abadi</a>
             </div>
             <div class="flex items-center gap-6 ml-auto">
                 <div class="hidden md:flex items-center gap-8">
@@ -124,7 +124,7 @@
                 <div class="flex items-center gap-4">
                 @guest
                     <a href="{{ route('login') }}" class="hidden sm:block text-primary font-semibold hover:opacity-80 transition-opacity active:scale-95 duration-200">Login</a>
-                    <a href="{{ route('register') }}" class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold hover:opacity-90 active:scale-95 transition-all duration-200">Register</a>
+                    <a href="{{ route('register') }}" class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold hover:opacity-90 active:scale-95 transition-all duration-200">Buat Akun</a>
                 @else
                     @if(auth()->user()->isAdmin())
                         <a href="{{ route('admin.dashboard') }}" class="hidden sm:flex items-center gap-1 text-primary font-semibold text-sm hover:opacity-80 transition-opacity">
@@ -175,7 +175,7 @@
                 @guest
                     <hr class="border-outline-variant">
                     <a href="{{ route('login') }}" class="block px-4 py-2.5 rounded-xl text-primary font-semibold text-center" @click="mobileOpen = false">Login</a>
-                    <a href="{{ route('register') }}" class="block px-4 py-2.5 rounded-xl bg-primary text-white font-bold text-center" @click="mobileOpen = false">Register</a>
+                    <a href="{{ route('register') }}" class="block px-4 py-2.5 rounded-xl bg-primary text-white font-bold text-center" @click="mobileOpen = false">Buat Akun</a>
                 @else
                     <hr class="border-outline-variant">
                     <a href="{{ route('profile') }}" class="block px-4 py-2.5 rounded-xl text-on-surface hover:bg-surface-container-low" @click="mobileOpen = false">Akun Saya</a>
@@ -251,7 +251,7 @@
                     <li><a href="{{ route('pemesanan.create') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary-fixed">chevron_right</span>Pesan Travel</a></li>
                     <li><a href="{{ route('pemesanan.riwayat') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary-fixed">chevron_right</span>Riwayat Pemesanan</a></li>
                     <li><a href="{{ route('dashboard') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary-fixed">chevron_right</span>Dashboard</a></li>
-                    <li><a href="{{ route('login') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary-fixed">chevron_right</span>Login / Register</a></li>
+                    <li><a href="{{ route('login') }}" class="text-surface-container-low hover:text-secondary-fixed transition-colors font-body-md flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary-fixed">chevron_right</span>Login / Buat Akun</a></li>
                 </ul>
             </div>
             <div>
@@ -272,7 +272,7 @@
                     </li>
                     <li class="flex items-start gap-3">
                         <span class="material-symbols-outlined text-secondary-fixed mt-0.5">location_on</span>
-                        <span class="font-body-md">{{ $settings['alamat']->value ?? 'Bandar Lampung, Lampung' }}</span>
+                        <span class="font-body-md">{{ $settings['alamat']->value ?? 'Jl. Lintas Sumatera No.162, Bumisari, Kec. Natar, Kabupaten Lampung Selatan' }}</span>
                     </li>
                 </ul>
             </div>

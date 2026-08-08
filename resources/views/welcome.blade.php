@@ -11,9 +11,9 @@
     </div>
     <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full text-white">
         <div class="max-w-2xl">
-            <p class="mb-5 text-sm font-bold uppercase tracking-[0.18em] text-secondary-fixed">Travel &amp; rental mobil Lampung</p>
+            <p class="mb-5 text-sm font-bold uppercase tracking-[0.18em] text-secondary-fixed">Travel &amp; rental mobil Bandar Lampung</p>
             <h2 class="font-display-lg text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-6">
-               Jelajahi wisata Lampung dengan <span class="text-secondary-fixed">paket perjalanan terbaik.</span>
+               Jelajahi wisata Bandar Lampung dengan <span class="text-secondary-fixed">paket perjalanan terbaik.</span>
             </h2>
             <p class="font-body-lg text-lg md:text-xl opacity-90 mb-10 max-w-xl">
                 Nikmati paket wisata lengkap dengan kendaraan dan supir profesional, atau sewa mobil untuk perjalanan fleksibel sesuai rencana Anda.
@@ -64,7 +64,7 @@
     <div class="flex justify-between items-end mb-12">
         <div class="space-y-2">
             <span class="text-primary font-bold tracking-widest uppercase text-sm font-label-sm">Destinasi Populer</span>
-            <h3 class="font-display-lg text-3xl md:text-4xl font-bold text-on-surface">Wisata Terbaik di Lampung</h3>
+            <h3 class="font-display-lg text-3xl md:text-4xl font-bold text-on-surface">Wisata Terbaik di Bandar Lampung</h3>
         </div>
         <a href="{{ route('destinasi.index') }}" class="hidden md:flex items-center gap-2 text-primary font-bold hover:underline font-body-md">
             Lihat Semua

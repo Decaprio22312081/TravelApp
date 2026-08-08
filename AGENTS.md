@@ -2,7 +2,7 @@
 
 ## Project
 
-TravelKu — Laravel 13.8 travel/rental mobil app for Bandar Lampung, Indonesia. All UI text is Indonesian (written directly in Blade templates, not via translation files).
+TravelKu — Laravel 13 (13.16.1 installed, `^13.8`) travel/rental mobil app for Bandar Lampung, Indonesia. All UI text is Indonesian (written directly in Blade templates, not via translation files).
 
 ## Quick Commands
 
@@ -15,7 +15,7 @@ TravelKu — Laravel 13.8 travel/rental mobil app for Bandar Lampung, Indonesia.
 
 ## Stack
 
-- PHP 8.3, Laravel 13.8, SQLite (dev + testing), Blade templates (no Livewire/Inertia, no API routes)
+- PHP ^8.3 (runs on 8.4), Laravel ^13.8 (13.16.1 installed), SQLite (dev + testing), Blade templates (no Livewire/Inertia, no API routes — `routes/web.php` + `routes/console.php` only)
 - **All styling is Tailwind v4 via CDN** (`cdn.tailwindcss.com` with `forms,container-queries` plugins) + an inline `tailwind.config` theme block in each layout (custom `primary`/`secondary`/`surface` palette, `DM Sans` + `Fraunces` Google Fonts, custom radii, `!important` `.rounded-3xl/4xl` overrides). `@tailwindcss/vite` + `resources/css/app.css` are configured but **no view uses `@vite`** — `npm run build` output does not affect the UI.
 - Font Awesome 6.5 on the **admin** layout; Material Symbols (Google Fonts) on all pages; Alpine.js via CDN (`alpinejs@3.x.x`) — no npm package
 - Maps: Google Maps embed (`destinasi/show`), Leaflet/OpenStreetMap (`tentang-kami`)
@@ -28,8 +28,8 @@ Single Laravel project. Non-default drivers (all `database`): `SESSION_DRIVER`, 
 
 | Path | Notes |
 |---|---|
-| `app/Models/` | 10 models: Destinasi, Mobil, Pemesanan, Pembayaran, Ulasan, Mitra, BankAccount, Setting, PromoBanner, User |
-| `app/Http/Controllers/` | Public controllers; `Admin/` subdir (10) incl. `LaporanController` (CSV export at `/admin/laporan/export`) and `PengaturanController` (settings, bank accounts, promo banners) |
+| `app/Models/` | 11 models: Destinasi, Mobil, Paket, Pemesanan, Pembayaran, Ulasan, Mitra, BankAccount, Setting, PromoBanner, User |
+| `app/Http/Controllers/` | Public controllers; `Admin/` subdir (11) incl. `LaporanController` (CSV export at `/admin/laporan/export`) and `PengaturanController` (settings, bank accounts, promo banners) |
 | `app/Http/Middleware/AdminMiddleware.php` | Checks `User::isAdmin()` (`role === 'admin'`), returns 403 |
 | `routes/web.php` | All routes; admin prefix `/admin` with `auth` + `admin` middleware |
 | `resources/views/` | Blade views per feature; layouts `layouts/app.blade.php` and `admin/layouts/app.blade.php` |
@@ -38,7 +38,7 @@ Single Laravel project. Non-default drivers (all `database`): `SESSION_DRIVER`, 
 
 ## Conventions
 
-- **Models:** 9 of 10 use `protected $fillable` arrays. Only `User.php` uses PHP 8 `#[Fillable]` / `#[Hidden]` attributes.
+- **Models:** 10 of 11 use `protected $fillable` arrays. Only `User.php` uses PHP 8 `#[Fillable]` / `#[Hidden]` attributes.
 - **Indonesian naming:** `pemesanan` (order), `pembayaran` (payment), `destinasi` (destination), `ulasan` (review), `mobil` (car), `mitra` (partner)
 - **Status enums (Indonesian, defined in migrations):** `pemesanan.status`: `menunggu_pembayaran`, `menunggu_verifikasi`, `dikonfirmasi`, `berjalan`, `selesai`, `ditolak`, `batal`; `pembayaran.status`: `menunggu_verifikasi`, `terverifikasi`, `ditolak`; `mobil.status`: `tersedia`, `disewa`, `maintenance`
 - **Order flow:** user books via `/pesan` → uploads payment → admin verifies (`/admin/pembayaran/{id}/verifikasi`) → user reviews (`/ulasan/{pemesanan_id}`)
@@ -67,3 +67,9 @@ Single Laravel project. Non-default drivers (all `database`): `SESSION_DRIVER`, 
 - `.env` is not in the repo; `composer setup` copies `.env.example` (`APP_LOCALE=en` but all UI is Indonesian — no translation system)
 - `database/database.sqlite` is gitignored and not committed; `php artisan migrate` auto-creates it (Laravel SQLite connector)
 - `composer dev` requires Node.js (uses `npx concurrently`)
+
+## Blade Gotchas (verified parse errors)
+
+- **Never pass an inline array literal to `@json()`.** Laravel's `@json` directive compiles via `explode(',')` on the expression, so any comma inside the expression (e.g. `@json($x->map(fn($p) => ['a' => $p->a, ...]))`) silently mangles the compiled PHP ("Unclosed '[' ... does not match ')'"). Always pre-compute the array in the controller and pass `@json($variable)`. ⚠️ Live bug today: `resources/views/pemesanan/create.blade.php` (~line 290) still passes inline arrays this way and breaks `GET /pesan`.
+- **Never nest `@php ... @endphp` inside another `@php` block.** Blade's `@php(.*?)@endphp` regex is non-greedy and matches first-open to first-close, leaving a literal `@php` in the compiled PHP ("unexpected variable ..."). Use one flat `@php` block. ⚠️ Live bug today: `resources/views/pemesanan/show.blade.php` (~line 40) nests `@php` and breaks `GET /pesanan/{id}`.
+- **Schema drift:** if you get "no such column" on a dev query, the local `database.sqlite` is out of sync with the (edited) migration files — some migrations were rewritten after being run and an old migration record can linger. Fix: `php artisan migrate:fresh --seed` (wipes local data).

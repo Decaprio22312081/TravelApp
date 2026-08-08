@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Destinasi Wisata - TravelKu')
+@section('title', 'Destinasi Wisata Bandar Lampung - CV. Afia Jaya Abadi')
 
 @section('content')
 <main class="pt-32 pb-20 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
     {{-- HEADER --}}
     <header class="mb-12 text-center md:text-left">
+        <span class="text-primary font-bold tracking-widest uppercase text-sm font-label-sm mb-2 block">CV. Afia Jaya Abadi</span>
         <h1 class="font-display-lg text-4xl md:text-5xl font-bold text-on-surface mb-6">Destinasi Wisata Bandar Lampung</h1>
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div class="relative w-full md:max-w-md">

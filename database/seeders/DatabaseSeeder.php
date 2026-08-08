@@ -198,7 +198,7 @@ class DatabaseSeeder extends Seeder
         Setting::create(['key' => 'no_whatsapp', 'value' => '6282112345678']);
         Setting::create(['key' => 'no_telp', 'value' => '0853 7915 3783']);
         Setting::create(['key' => 'email', 'value' => 'info@travelku.com']);
-        Setting::create(['key' => 'alamat', 'value' => 'Jl. Raden Intan No. 123, Bandar Lampung']);
+        Setting::create(['key' => 'alamat', 'value' => 'Jl. Lintas Sumatera No.162, Bumisari, Kec. Natar, Kabupaten Lampung Selatan']);
         Setting::create(['key' => 'facebook', 'value' => 'travelkulanteng']);
         Setting::create(['key' => 'instagram', 'value' => '@travelku_lampung']);
         Setting::create(['key' => 'tentang_kami', 'value' => 'TravelKu adalah layanan travel dan rental mobil dengan supir profesional yang telah melayani masyarakat Bandar Lampung dan sekitarnya sejak 2020. Kami berkomitmen memberikan pengalaman perjalanan yang nyaman, aman, dan terjangkau.\n\nDengan armada mobil yang terawat dan supir yang berpengalaman serta menguasai rute di seluruh provinsi Lampung, TravelKu menjadi pilihan tepat untuk perjalanan wisata, dinas, atau antar jemput.\n\nVisi kami menjadi layanan travel terdepan di Lampung yang mengutamakan kepuasan dan kenyamanan pelanggan. Misi kami menyediakan transportasi berkualitas dengan harga bersahabat, didukung oleh sumber daya profesional dan armada yang selalu prima.']);

@@ -8,6 +8,7 @@ use App\Models\Paket;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PemesananController extends Controller
 {
@@ -39,7 +40,25 @@ class PemesananController extends Controller
             $selectedMobil = Mobil::find($mobil_id);
         }
 
-        return view('pemesanan.create', compact('destinasis', 'mobils', 'selectedDestinasi', 'selectedMobil', 'selectedPaket'));
+        $paketJson = $destinasis->flatMap->pakets->map(fn ($p) => [
+            'id' => $p->id,
+            'destinasi_id' => $p->destinasi_id,
+            'nama' => $p->nama,
+            'harga' => (int) $p->harga,
+            'durasi' => (int) $p->durasi_hari,
+            'destinasi_nama' => $p->destinasi->nama ?? '',
+        ])->values();
+
+        $mobilJson = $mobils
+            ->filter(fn ($m) => Str::contains(mb_strtolower($m->nama), 'haice'))
+            ->map(fn ($m) => [
+                'id' => $m->id,
+                'nama' => $m->nama,
+                'merk' => $m->merk,
+                'kapasitas' => (int) $m->kapasitas,
+            ])->values();
+
+        return view('pemesanan.create', compact('destinasis', 'mobils', 'selectedDestinasi', 'selectedMobil', 'selectedPaket', 'paketJson', 'mobilJson'));
     }
 
     public function cancel($id)
@@ -96,7 +115,7 @@ class PemesananController extends Controller
             $data['destinasi_id'] = $paket->destinasi_id;
             $data['jumlah_hari'] = $paket->durasi_hari;
             $data['alamat_tujuan'] = $paket->destinasi?->nama ?? $data['alamat_tujuan'];
-            $data['total_harga'] = $paket->harga + ($mobil->harga_per_hari * $paket->durasi_hari);
+            $data['total_harga'] = $paket->harga;
         } else {
             $data['jumlah_hari'] = $data['jumlah_hari'] ?? 1;
             $data['total_harga'] = $mobil->harga_per_hari * $data['jumlah_hari'];

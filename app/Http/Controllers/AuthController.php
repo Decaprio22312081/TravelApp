@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mobil;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +39,9 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('auth.register');
+        $mobils = Mobil::where('status', 'tersedia')->get();
+
+        return view('auth.register', compact('mobils'));
     }
 
     public function doRegister(Request $request)

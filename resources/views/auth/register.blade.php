@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Register | TravelKu</title>
+<title>Buat Akun | TravelKu</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
@@ -94,7 +94,7 @@ tailwind.config = {
             <div class="flex items-center gap-4">
             @guest
                 <a href="{{ route('login') }}" class="hidden sm:block text-primary font-semibold hover:opacity-80 transition-opacity active:scale-95 duration-200">Login</a>
-                <a href="{{ route('register') }}" class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold hover:opacity-90 active:scale-95 transition-all duration-200">Register</a>
+                <a href="{{ route('register') }}" class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold hover:opacity-90 active:scale-95 transition-all duration-200">Buat Akun</a>
             @else
                 @if(auth()->user()->isAdmin())
                     <a href="{{ route('admin.dashboard') }}" class="hidden sm:flex items-center gap-1 text-primary font-semibold text-sm hover:opacity-80 transition-opacity">
@@ -143,7 +143,7 @@ tailwind.config = {
             @guest
                 <hr class="border-outline-variant">
                 <a href="{{ route('login') }}" class="block px-4 py-2.5 rounded-xl text-primary font-semibold text-center" @click="mobileOpen = false">Login</a>
-                <a href="{{ route('register') }}" class="block px-4 py-2.5 rounded-xl bg-primary text-white font-bold text-center" @click="mobileOpen = false">Register</a>
+                <a href="{{ route('register') }}" class="block px-4 py-2.5 rounded-xl bg-primary text-white font-bold text-center" @click="mobileOpen = false">Buat Akun</a>
             @else
                 <hr class="border-outline-variant">
                 <a href="{{ route('profile') }}" class="block px-4 py-2.5 rounded-xl text-on-surface hover:bg-surface-container-low" @click="mobileOpen = false">Akun Saya</a>
@@ -184,10 +184,24 @@ Bergabunglah dengan TravelKu dan dapatkan akses ke armada kendaraan premium kami
 </div>
 <div class="relative h-64 rounded-xl overflow-hidden shadow-xl">
 <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent z-10"></div>
-<img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80" alt="Premium fleet">
-<div class="absolute bottom-4 left-4 z-20 text-white">
-<p class="font-bold text-sm">ARMADA PILIHAN</p>
-<p class="text-xs opacity-80">Luxury SUV Series 2024</p>
+<div class="absolute inset-0 p-4 flex flex-col justify-end z-20">
+<p class="font-bold text-sm text-white">ARMADA PILIHAN</p>
+<p class="text-xs text-white/80">Beberapa armada terbaik kami</p>
+</div>
+<div class="absolute inset-0 p-3 grid grid-cols-3 gap-2">
+@forelse($mobils->take(6) as $m)
+@if($m->foto)
+<img class="w-full h-full object-cover rounded-lg" src="{{ asset('storage/'.$m->foto) }}" alt="{{ $m->nama }}">
+@else
+<div class="w-full h-full rounded-lg bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-2xl">directions_car</span>
+</div>
+@endif
+@empty
+<div class="col-span-3 h-full rounded-lg bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-2xl">directions_car</span>
+</div>
+@endforelse
 </div>
 </div>
 </div>

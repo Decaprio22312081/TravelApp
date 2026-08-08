@@ -37,9 +37,8 @@
         'icon' => 'info',
         'label' => $pemesanan->status,
     ];
-    @php
-        $isPaket = (bool) $pemesanan->paket_id;
-        $infoItems = $isPaket
+    $isPaket = (bool) $pemesanan->paket_id;
+    $infoItems = $isPaket
             ? [
                 ['icon' => 'hiking', 'label' => 'Paket Wisata', 'value' => $pemesanan->paket->nama ?? '-'],
                 ['icon' => 'directions_car', 'label' => 'Kendaraan', 'value' => $pemesanan->mobil->nama ?? '-'],
@@ -173,8 +172,8 @@
                             <span class="font-body-md">Rp {{ number_format($pemesanan->paket->harga ?? 0, 0, ',', '.') }}</span>
                         </div>
                         <div class="flex justify-between items-center text-on-surface-variant">
-                            <span class="font-body-md">Kendaraan + Supir ({{ $pemesanan->jumlah_hari }} hari)</span>
-                            <span class="font-body-md">Rp {{ number_format(($pemesanan->mobil->harga_per_hari ?? 0) * $pemesanan->jumlah_hari, 0, ',', '.') }}</span>
+                            <span class="font-body-md">Kendaraan + Supir ({{ $pemesanan->mobil->nama ?? '-' }})</span>
+                            <span class="font-body-md font-semibold text-green-600">Termasuk</span>
                         </div>
                         @else
                         <div class="flex justify-between items-center text-on-surface-variant">
@@ -184,6 +183,10 @@
                         <div class="flex justify-between items-center text-on-surface-variant">
                             <span class="font-body-md">Jumlah Hari</span>
                             <span class="font-body-md">{{ $pemesanan->jumlah_hari }}x</span>
+                        </div>
+                        <div class="flex justify-between items-center text-on-surface-variant">
+                            <span class="font-body-md">Biaya Supir</span>
+                            <span class="font-body-md font-semibold text-green-600">Gratis</span>
                         </div>
                         @endif
                         <div class="pt-4 border-t border-outline-variant/50 flex justify-between items-center">

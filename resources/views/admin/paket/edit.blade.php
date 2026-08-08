@@ -58,13 +58,6 @@
             </div>
 
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-medium mb-2">Itinerary</label>
-                <textarea name="itinerary" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none @error('itinerary') border-red-500 @enderror">{{ old('itinerary', $paket->itinerary) }}</textarea>
-                <p class="text-gray-500 text-xs mt-1">Satu baris per kegiatan/agenda.</p>
-                @error('itinerary')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
-            </div>
-
-            <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-medium mb-2">Foto Paket</label>
                 @if($paket->foto)
                 <div class="mb-2">

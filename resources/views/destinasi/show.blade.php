@@ -71,15 +71,12 @@
 
                             @if($paket->fasilitasList())
                             <div class="flex flex-wrap gap-2 mb-6">
-                                @foreach(array_slice($paket->fasilitasList(), 0, 4) as $f)
+                                @foreach($paket->fasilitasList() as $f)
                                 <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-label-sm font-label-sm">
                                     <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
                                     {{ $f }}
                                 </span>
                                 @endforeach
-                                @if(count($paket->fasilitasList()) > 4)
-                                <span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant text-label-sm font-label-sm">+{{ count($paket->fasilitasList()) - 4 }} lainnya</span>
-                                @endif
                             </div>
                             @endif
 

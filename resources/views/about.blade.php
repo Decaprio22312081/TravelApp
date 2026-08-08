@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tentang Kami - Cv. Afia Jaya Abadi')
+@section('title', 'Tentang Kami - CV. Afia Jaya Abadi')
 
 @section('content')
 {{-- HERO --}}
@@ -12,10 +12,10 @@
     <div class="relative z-10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
         <div class="max-w-2xl">
             <h1 class="font-display-lg text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-6">
-                Tentang Cv. Afia Jaya Abadi
+                Tentang CV. Afia Jaya Abadi
             </h1>
             <p class="font-body-lg text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-xl">
-                Berkomitmen memberikan pengalaman perjalanan tak terlupakan melalui layanan travel mobil premium yang handal, aman, dan profesional di seluruh wilayah Lampung.
+                Berkomitmen memberikan pengalaman perjalanan tak terlupakan melalui layanan travel mobil premium yang handal, aman, dan profesional di seluruh wilayah Bandar Lampung.
             </p>
             <div class="flex gap-4">
                 <a href="#layanan" class="bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-primary-container hover:scale-105 transition-all shadow-lg inline-block">
@@ -35,7 +35,7 @@
             </div>
             <h2 class="font-headline-md text-headline-md text-primary mb-4">Visi Kami</h2>
             <p class="text-on-surface-variant leading-relaxed">
-                Menjadi penyedia jasa transportasi dan solusi perjalanan terdepan di Lampung yang diakui karena kualitas armada, integritas layanan, dan kontribusi positif terhadap pariwisata daerah.
+                Menjadi penyedia jasa transportasi dan solusi perjalanan terdepan di Bandar Lampung yang diakui karena kualitas armada, integritas layanan, dan kontribusi positif terhadap pariwisata daerah.
             </p>
         </div>
         <div class="bg-primary p-10 rounded-[24px] shadow-lg text-white hover:-translate-y-1 transition-all">
@@ -78,7 +78,7 @@
                     <span class="material-symbols-outlined text-4xl">person_pin</span>
                 </div>
                 <h3 class="font-bold text-xl mb-3">Supir Berpengalaman</h3>
-                <p class="text-on-surface-variant">Tim supir kami sangat mengenal medan Lampung dan terlatih secara profesional dalam melayani pelanggan.</p>
+                <p class="text-on-surface-variant">Tim supir kami sangat mengenal medan Bandar Lampung dan terlatih secara profesional dalam melayani pelanggan.</p>
             </div>
             <div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:shadow-md transition-all group">
                 <div class="mb-6 inline-block p-4 rounded-full bg-surface-container text-primary group-hover:bg-primary group-hover:text-white transition-colors">
@@ -188,7 +188,7 @@
                         <span class="material-symbols-outlined text-primary mt-1">location_on</span>
                         <div>
                             <h5 class="font-bold mb-1">Alamat Utama</h5>
-                            <p class="text-on-surface-variant">{{ $settings['alamat']->value ?? 'Jl. Raden Intan No. 123, Tanjung Karang Pusat, Bandar Lampung, Lampung 35111' }}</p>
+                            <p class="text-on-surface-variant">{{ $settings['alamat']->value ?? 'Jl. Lintas Sumatera No.162, Bumisari, Kec. Natar, Kabupaten Lampung Selatan' }}</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
@@ -270,7 +270,7 @@
         const office = {
             latitude: -5.290991947525421,
             longitude: 105.1909975633846,
-            name: 'CV. Afia Jaya Abadi Rental Mobil Lampung'
+            name: 'CV. Afia Jaya Abadi Rental Mobil Bandar Lampung'
         };
         const bounds = [[office.latitude, office.longitude]];
         const map = L.map('map').setView([office.latitude, office.longitude], 14);

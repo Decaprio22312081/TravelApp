@@ -113,7 +113,7 @@
                     </div>
                     <p class="font-body-md text-on-surface-variant mb-6 flex items-center gap-2">
                         <span class="material-symbols-outlined text-primary text-lg">lightbulb</span>
-                        Sistem merekomendasikan kendaraan sesuai jumlah peserta.
+                        Kendaraan HiAce + supir sudah termasuk dalam harga paket wisata.
                     </p>
                     <div class="space-y-2">
                         <label class="font-label-sm text-label-sm text-on-surface-variant">Kendaraan</label>
@@ -239,8 +239,8 @@
                                     <span id="paketHargaDisplay">Rp {{ $selectedPaket ? number_format($selectedPaket->harga, 0, ',', '.') : '0' }}</span>
                                 </div>
                                 <div class="flex justify-between text-on-surface-variant font-body-md">
-                                    <span>Kendaraan + Supir</span>
-                                    <span id="paketMobilDisplay">Rp 0</span>
+                                    <span>Kendaraan + Supir (HiAce)</span>
+                                    <span class="text-green-600 font-semibold">Termasuk</span>
                                 </div>
                             </div>
                             {{-- Mobil breakdown --}}
@@ -248,6 +248,10 @@
                                 <div class="flex justify-between text-on-surface-variant font-body-md">
                                     <span>Harga Sewa</span>
                                     <span id="hargaPerHariDisplay">Rp {{ $selectedMobil ? number_format($selectedMobil->harga_per_hari, 0, ',', '.') : '0' }} / hari</span>
+                                </div>
+                                <div class="flex justify-between text-on-surface-variant font-body-md">
+                                    <span>Biaya Supir</span>
+                                    <span class="text-green-600 font-semibold">Gratis</span>
                                 </div>
                                 <div class="flex justify-between text-on-surface-variant font-body-md">
                                     <span>Durasi</span>
@@ -287,21 +291,8 @@
     .ambient-card:hover { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); }
 </style>
 <script>
-    const PAKETS = @json($destinasis->flatMap->pakets->map(fn ($p) => [
-        'id' => $p->id,
-        'destinasi_id' => $p->destinasi_id,
-        'nama' => $p->nama,
-        'harga' => (int) $p->harga,
-        'durasi' => (int) $p->durasi_hari,
-        'destinasi_nama' => $p->destinasi->nama ?? '',
-    ]));
-    const MOBILS = @json($mobils->map(fn ($m) => [
-        'id' => $m->id,
-        'nama' => $m->nama,
-        'merk' => $m->merk,
-        'kapasitas' => (int) $m->kapasitas,
-        'harga' => (int) $m->harga_per_hari,
-    ]));
+    const PAKETS = @json($paketJson);
+    const MOBILS = @json($mobilJson);
 
     const selectedPaketId = {{ $selectedPaket ? $selectedPaket->id : 'null' }};
     const selectedMobilId = {{ $selectedMobil ? $selectedMobil->id : 'null' }};
@@ -318,7 +309,6 @@
     const rekomendasiInfo = document.getElementById('rekomendasiInfo');
 
     const paketHargaDisplay = document.getElementById('paketHargaDisplay');
-    const paketMobilDisplay = document.getElementById('paketMobilDisplay');
     const hargaPerHariDisplay = document.getElementById('hargaPerHariDisplay');
     const jumlahHariDisplay = document.getElementById('jumlahHariDisplay');
     const totalDisplay = document.getElementById('totalDisplay');
@@ -394,8 +384,7 @@
             const fits = m.kapasitas >= peserta;
             const opt = document.createElement('option');
             opt.value = m.id;
-            opt.textContent = m.nama + ' - ' + m.merk + ' (' + m.kapasitas + ' kursi) - ' + formatRp(m.harga) + '/hari' + (fits ? ' ✓' : '');
-            opt.dataset.harga = m.harga;
+            opt.textContent = m.nama + ' - ' + m.merk + ' (' + m.kapasitas + ' kursi)' + (fits ? ' ✓' : '');
             opt.dataset.kapasitas = m.kapasitas;
             opt.dataset.nama = m.nama;
             if (fits && !recommended) recommended = opt;
@@ -419,14 +408,9 @@
     function hitungTotal() {
         if (currentMode === 'paket') {
             const pOpt = paketSelect.options[paketSelect.selectedIndex];
-            const mOpt = paketMobilSelect.options[paketMobilSelect.selectedIndex];
             const p = pOpt.value ? (parseInt(pOpt.dataset.harga) || 0) : 0;
-            const d = pOpt.value ? (parseInt(pOpt.dataset.durasi) || 0) : 0;
-            const mh = mOpt.value ? (parseInt(mOpt.dataset.harga) || 0) : 0;
-            const total = p + (mh * d);
             paketHargaDisplay.textContent = formatRp(p);
-            paketMobilDisplay.textContent = formatRp(mh * d) + ' (' + d + ' hari)';
-            totalDisplay.textContent = formatRp(total);
+            totalDisplay.textContent = formatRp(p);
         } else {
             const opt = mobilSelect.options[mobilSelect.selectedIndex];
             const harga = opt.value ? (parseInt(opt.dataset.harga) || 0) : 0;
