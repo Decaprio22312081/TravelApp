@@ -23,18 +23,18 @@ class PushToMysql extends Command
     ];
 
     private const TABLE_ORDER = [
-        'migrations',
-        'users',
-        'destinasi',
-        'mobil',
-        'mitra',
+        'ulasan',
+        'pembayaran',
+        'pemesanan',
         'paket',
+        'mitra',
+        'mobil',
+        'destinasi',
         'bank_accounts',
         'settings',
         'promo_banners',
-        'pemesanan',
-        'pembayaran',
-        'ulasan',
+        'users',
+        'migrations',
     ];
 
     public function handle(): int
@@ -79,7 +79,7 @@ class PushToMysql extends Command
         foreach ($tables as $table) {
             $columns = Schema::connection('sqlite')->getColumnListing($table);
 
-            $lines[] = 'TRUNCATE TABLE `'.$table.'`;';
+            $lines[] = 'DELETE FROM `'.$table.'`;';
 
             $query = DB::connection('sqlite')->table($table);
             if (Schema::connection('sqlite')->hasColumn($table, 'id')) {
@@ -112,6 +112,10 @@ class PushToMysql extends Command
                 }
             }
             $flush();
+
+            if (Schema::connection('sqlite')->hasColumn($table, 'id')) {
+                $lines[] = 'ALTER TABLE `'.$table.'` AUTO_INCREMENT = 1;';
+            }
 
             $lines[] = '';
             $report[$table] = $count;
