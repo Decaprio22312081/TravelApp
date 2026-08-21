@@ -6,20 +6,20 @@
 <main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-10">
     {{-- STEP INDICATOR --}}
     <div class="flex justify-center items-center mb-12 overflow-x-auto whitespace-nowrap pb-4 md:pb-0">
-        <div class="flex items-center space-x-4 md:space-x-8">
+        <div class="flex items-center space-x-3 md:space-x-8 mx-auto">
             <div class="flex items-center gap-2 text-primary font-bold relative">
-                <span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center text-label-sm font-label-sm">1</span>
+                <span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center text-label-sm font-label-sm flex-shrink-0">1</span>
                 <span class="font-label-sm">Pilih Paket / Kendaraan</span>
                 <div class="absolute -bottom-2 left-0 w-full h-1 bg-primary rounded-full"></div>
             </div>
-            <div class="w-12 h-px bg-outline-variant"></div>
+            <div class="w-6 md:w-12 h-px bg-outline-variant flex-shrink-0"></div>
             <div class="flex items-center gap-2 text-on-surface-variant opacity-60">
-                <span class="w-8 h-8 rounded-full border-2 border-on-surface-variant flex items-center justify-center text-label-sm font-label-sm">2</span>
+                <span class="w-8 h-8 rounded-full border-2 border-on-surface-variant flex items-center justify-center text-label-sm font-label-sm flex-shrink-0">2</span>
                 <span class="font-label-sm">Data Pemesanan</span>
             </div>
-            <div class="w-12 h-px bg-outline-variant"></div>
+            <div class="w-6 md:w-12 h-px bg-outline-variant flex-shrink-0"></div>
             <div class="flex items-center gap-2 text-on-surface-variant opacity-60">
-                <span class="w-8 h-8 rounded-full border-2 border-on-surface-variant flex items-center justify-center text-label-sm font-label-sm">3</span>
+                <span class="w-8 h-8 rounded-full border-2 border-on-surface-variant flex items-center justify-center text-label-sm font-label-sm flex-shrink-0">3</span>
                 <span class="font-label-sm">Konfirmasi</span>
             </div>
         </div>
@@ -27,12 +27,12 @@
 
     {{-- MODE TOGGLE --}}
     <div class="flex justify-center mb-10">
-        <div class="inline-flex bg-surface-container-low p-1.5 rounded-2xl border border-outline-variant/40 gap-1" id="modeToggle">
-            <button type="button" data-mode="paket" class="mode-btn px-8 py-3.5 rounded-xl font-bold font-display-lg flex items-center gap-2 transition-all">
+        <div class="inline-flex bg-surface-container-low p-1.5 rounded-2xl border border-outline-variant/40 gap-1 w-full max-w-md sm:w-auto sm:max-w-none" id="modeToggle">
+            <button type="button" data-mode="paket" class="mode-btn flex-1 sm:flex-initial justify-center px-4 sm:px-8 py-3 rounded-xl sm:py-3.5 font-bold font-display-lg flex items-center gap-2 transition-all whitespace-nowrap">
                 <span class="material-symbols-outlined">hiking</span>
                 Paket Wisata
             </button>
-            <button type="button" data-mode="mobil" class="mode-btn px-8 py-3.5 rounded-xl font-bold font-display-lg flex items-center gap-2 transition-all">
+            <button type="button" data-mode="mobil" class="mode-btn flex-1 sm:flex-initial justify-center px-4 sm:px-8 py-3 rounded-xl sm:py-3.5 font-bold font-display-lg flex items-center gap-2 transition-all whitespace-nowrap">
                 <span class="material-symbols-outlined">directions_car</span>
                 Sewa Mobil
             </button>

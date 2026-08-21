@@ -7,23 +7,23 @@
     {{-- Step Indicator --}}
     <div class="mb-12 flex justify-center items-center">
         <div class="flex items-center w-full max-w-2xl">
-            <div class="flex flex-col items-center flex-1">
-                <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold mb-2">1</div>
-                <span class="text-sm font-medium text-on-surface-variant">Pilih Paket / Kendaraan</span>
+            <div class="flex flex-col items-center flex-1 min-w-0">
+                <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold mb-2 flex-shrink-0">1</div>
+                <span class="text-[11px] sm:text-sm font-medium text-on-surface-variant text-center leading-tight">Pilih Paket / Kendaraan</span>
             </div>
-            <div class="h-1 flex-1 bg-primary/20 mx-2 mb-6">
+            <div class="h-1 flex-1 bg-primary/20 mx-2 mb-6 rounded-full">
                 <div class="h-full bg-primary w-full"></div>
             </div>
-            <div class="flex flex-col items-center flex-1">
-                <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold mb-2">2</div>
-                <span class="text-sm font-medium text-on-surface-variant">Detail Pesanan</span>
+            <div class="flex flex-col items-center flex-1 min-w-0">
+                <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold mb-2 flex-shrink-0">2</div>
+                <span class="text-[11px] sm:text-sm font-medium text-on-surface-variant text-center leading-tight">Detail Pesanan</span>
             </div>
-            <div class="h-1 flex-1 bg-primary/20 mx-2 mb-6">
+            <div class="h-1 flex-1 bg-primary/20 mx-2 mb-6 rounded-full">
                 <div class="h-full bg-primary w-full"></div>
             </div>
-            <div class="flex flex-col items-center flex-1">
-                <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold mb-2">3</div>
-                <span class="text-sm font-bold text-primary">Konfirmasi</span>
+            <div class="flex flex-col items-center flex-1 min-w-0">
+                <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold mb-2 flex-shrink-0">3</div>
+                <span class="text-[11px] sm:text-sm font-bold text-primary text-center leading-tight">Konfirmasi</span>
             </div>
         </div>
     </div>

@@ -3,7 +3,7 @@
 @section('title', 'Beri Ulasan - TravelKu')
 
 @section('content')
-<div class="max-w-lg mx-auto">
+<div class="max-w-lg mx-auto px-margin-mobile md:px-0">
     <h1 class="text-2xl font-bold text-gray-800 mb-6">Beri Ulasan</h1>
 
     <div class="bg-white rounded-xl shadow p-6 mb-6">

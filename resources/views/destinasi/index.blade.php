@@ -68,7 +68,7 @@
 
     {{-- PAGINATION --}}
     @if($destinasi->hasPages())
-    <nav class="mt-16 flex justify-center items-center gap-2">
+    <nav class="mt-16 flex flex-wrap justify-center items-center gap-2">
         @if($destinasi->onFirstPage())
         <span class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-outline cursor-not-allowed">
             <span class="material-symbols-outlined">chevron_left</span>

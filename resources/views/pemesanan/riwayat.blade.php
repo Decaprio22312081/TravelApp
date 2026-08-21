@@ -10,11 +10,11 @@
             <h2 class="text-headline-md font-headline-md font-bold text-primary mb-1">Riwayat Pemesanan</h2>
             <p class="text-on-surface-variant">Pantau status paket wisata &amp; penyewaan kendaraan Anda di sini.</p>
         </div>
-        <div class="flex items-center gap-2 bg-surface-container-low p-1 rounded-xl border border-outline-variant/30" x-data="{ tab: 'semua' }">
-            <button @click="tab = 'semua'" :class="tab === 'semua' ? 'bg-surface-container-lowest text-primary font-bold shadow-sm' : 'text-on-surface-variant'" class="px-6 py-2 rounded-lg transition-all text-body-md">Semua</button>
-            <button @click="tab = 'menunggu'" :class="tab === 'menunggu' ? 'bg-surface-container-lowest text-primary font-bold shadow-sm' : 'text-on-surface-variant'" class="px-6 py-2 rounded-lg transition-all text-body-md">Menunggu</button>
-            <button @click="tab = 'aktif'" :class="tab === 'aktif' ? 'bg-surface-container-lowest text-primary font-bold shadow-sm' : 'text-on-surface-variant'" class="px-6 py-2 rounded-lg transition-all text-body-md">Aktif</button>
-            <button @click="tab = 'selesai'" :class="tab === 'selesai' ? 'bg-surface-container-lowest text-primary font-bold shadow-sm' : 'text-on-surface-variant'" class="px-6 py-2 rounded-lg transition-all text-body-md">Selesai</button>
+        <div class="flex items-center gap-1 sm:gap-2 bg-surface-container-low p-1 rounded-xl border border-outline-variant/30 w-full sm:w-auto" x-data="{ tab: 'semua' }">
+            <button @click="tab = 'semua'" :class="tab === 'semua' ? 'bg-surface-container-lowest text-primary font-bold shadow-sm' : 'text-on-surface-variant'" class="flex-1 sm:flex-none px-2 sm:px-6 py-2 rounded-lg transition-all text-xs sm:text-body-md text-center whitespace-nowrap">Semua</button>
+            <button @click="tab = 'menunggu'" :class="tab === 'menunggu' ? 'bg-surface-container-lowest text-primary font-bold shadow-sm' : 'text-on-surface-variant'" class="flex-1 sm:flex-none px-2 sm:px-6 py-2 rounded-lg transition-all text-xs sm:text-body-md text-center whitespace-nowrap">Menunggu</button>
+            <button @click="tab = 'aktif'" :class="tab === 'aktif' ? 'bg-surface-container-lowest text-primary font-bold shadow-sm' : 'text-on-surface-variant'" class="flex-1 sm:flex-none px-2 sm:px-6 py-2 rounded-lg transition-all text-xs sm:text-body-md text-center whitespace-nowrap">Aktif</button>
+            <button @click="tab = 'selesai'" :class="tab === 'selesai' ? 'bg-surface-container-lowest text-primary font-bold shadow-sm' : 'text-on-surface-variant'" class="flex-1 sm:flex-none px-2 sm:px-6 py-2 rounded-lg transition-all text-xs sm:text-body-md text-center whitespace-nowrap">Selesai</button>
         </div>
     </div>
 
@@ -130,7 +130,7 @@
 <footer class="w-full py-6 mt-auto bg-surface-container-lowest border-t border-outline-variant">
     <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto gap-4">
         <p class="font-label-sm text-sm text-on-surface-variant">&copy; {{ date('Y') }} TravelKu. All rights reserved.</p>
-        <div class="flex gap-6">
+        <div class="flex flex-wrap justify-center gap-x-4 gap-y-2">
             <a href="#" class="font-label-sm text-sm text-on-surface-variant hover:text-primary underline opacity-80 hover:opacity-100 transition-all">Syarat &amp; Ketentuan</a>
             <a href="#" class="font-label-sm text-sm text-on-surface-variant hover:text-primary underline opacity-80 hover:opacity-100 transition-all">Kebijakan Privasi</a>
             <a href="#" class="font-label-sm text-sm text-on-surface-variant hover:text-primary underline opacity-80 hover:opacity-100 transition-all">Bantuan</a>

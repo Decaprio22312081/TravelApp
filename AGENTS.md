@@ -72,6 +72,13 @@ Single Laravel project. Non-default drivers (all `database`): `SESSION_DRIVER`, 
 - `database/database.sqlite` is gitignored and not committed; `php artisan migrate` auto-creates it (Laravel SQLite connector)
 - `composer dev` requires Node.js (uses `npx concurrently`)
 
+## Deployment / Hosting
+
+- App is deployed to **MySQL shared hosting** while dev/test stay on SQLite (`DB_CONNECTION=sqlite` in `.env.example`). Two intentional MySQL-compat tweaks exist — do NOT revert them when touching config:
+  - `AppServiceProvider::boot()` calls `Schema::defaultStringLength(191)` (avoids index-key-length errors on hosted MySQL).
+  - `config/database.php` mysql `engine` = `'InnoDB ROW_FORMAT=DYNAMIC'`.
+- `public/index.php` contains a stray `//test` comment left from a deploy test — harmless, leave it unless asked.
+
 ## Blade Gotchas (verified parse errors)
 
 - **Never pass an inline array literal to `@json()`.** Laravel's `@json` directive compiles via `explode(',')` on the expression, so any comma inside the expression (e.g. `@json($x->map(fn($p) => ['a' => $p->a, ...]))`) silently mangles the compiled PHP ("Unclosed '[' ... does not match ')'"). Always pre-compute the array in the controller and pass `@json($variable)`. (Broke `GET /pesan` once — `pemesanan/create.blade.php` now uses `$paketJson`/`$mobilJson` from the controller.)

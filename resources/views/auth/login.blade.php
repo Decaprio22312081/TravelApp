@@ -81,11 +81,11 @@ tailwind.config = {
 {{-- NAVBAR --}}
 <header class="fixed top-0 w-full z-50 glass-nav shadow-sm">
     <nav class="flex items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-        <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">directions_car</span>
-            <a href="{{ url('/') }}" class="font-display-lg text-xl font-bold text-primary">Cv.Afia Jaya Abadi</a>
+        <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <span class="material-symbols-outlined text-primary text-2xl sm:text-3xl flex-shrink-0" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+            <a href="{{ url('/') }}" class="font-display-lg text-base sm:text-xl font-bold text-primary whitespace-nowrap truncate">CV. Afia Jaya Abadi</a>
         </div>
-        <div class="flex items-center gap-6 ml-auto">
+        <div class="flex items-center gap-2 sm:gap-6 ml-auto flex-shrink-0">
             <div class="hidden md:flex items-center gap-8">
                 <a href="{{ url('/') }}" class="text-on-surface-variant hover:text-primary transition-colors font-body-md {{ request()->is('/') ? 'text-primary font-bold border-b-2 border-primary pb-1' : '' }}">Home</a>
                 <a href="{{ route('destinasi.index') }}" class="text-on-surface-variant hover:text-primary transition-colors font-body-md {{ request()->routeIs('destinasi.*') ? 'text-primary font-bold border-b-2 border-primary pb-1' : '' }}">Destinasi</a>
@@ -107,7 +107,7 @@ tailwind.config = {
                     <button @click="open = !open" class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200">
                         <span class="material-symbols-outlined">account_circle</span>
                         <span class="hidden sm:inline font-semibold">{{ auth()->user()->name }}</span>
-                        <span class="material-symbols-outlined text-sm">expand_more</span>
+                        <span class="material-symbols-outlined text-sm hidden sm:inline">expand_more</span>
                     </button>
                     <div x-show="open" @click.away="open = false" x-cloak class="absolute right-0 mt-2 w-48 bg-surface-container-lowest rounded-2xl shadow-lg border border-outline-variant z-50 overflow-hidden">
                         <a href="{{ route('profile') }}" class="flex items-center gap-3 px-4 py-3 text-on-surface hover:bg-surface-container-low transition-colors font-body-md">
