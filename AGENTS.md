@@ -2,7 +2,7 @@
 
 ## Project
 
-TravelKu — Laravel 13 (13.16.1 installed, `^13.8`) travel/rental mobil app for Bandar Lampung, Indonesia. All UI text is Indonesian (written directly in Blade templates, not via translation files).
+TravelKu — Laravel 13 (13.16.1 installed, `^13.8`) travel/rental mobil app for Bandar Lampung, Indonesia. All UI text is Indonesian (written directly in Blade templates, not via translation files). Public branding is **"CV. Afia Jaya Abadi"** (navbar, page headers, page titles) though code/config still says "TravelKu".
 
 ## Quick Commands
 
@@ -42,7 +42,11 @@ Single Laravel project. Non-default drivers (all `database`): `SESSION_DRIVER`, 
 - **Indonesian naming:** `pemesanan` (order), `pembayaran` (payment), `destinasi` (destination), `ulasan` (review), `mobil` (car), `mitra` (partner)
 - **Status enums (Indonesian, defined in migrations):** `pemesanan.status`: `menunggu_pembayaran`, `menunggu_verifikasi`, `dikonfirmasi`, `berjalan`, `selesai`, `ditolak`, `batal`; `pembayaran.status`: `menunggu_verifikasi`, `terverifikasi`, `ditolak`; `mobil.status`: `tersedia`, `disewa`, `maintenance`
 - **Order flow:** user books via `/pesan` → uploads payment → admin verifies (`/admin/pembayaran/{id}/verifikasi`) → user reviews (`/ulasan/{pemesanan_id}`)
-- **Site text (contact, social, `tentang_kami`) lives in the `settings` table** (seeded in DatabaseSeeder, rendered via `Setting::keyBy('key')`) — not hardcoded in views
+- **Paket pricing:** a paket booking charges `total_harga = $paket->harga` ONLY — vehicle + supir are included in the paket price (vehicle rental is NOT added). Sewa mobil mode charges `mobil.harga_per_hari × jumlah_hari`. See `PemesananController::store` — don't "fix" the paket total back to `paket + mobil`.
+- **Paket-mode vehicle picker only lists HiAce:** `$mobilJson` (drives the paket-mode kendaraan `<select>`) is filtered to mobils whose name contains `haice` (case-insensitive). `$mobils` (sewa mobil mode) still lists all `tersedia` cars. Don't remove that filter.
+- **Branding:** navbar/headers/titles use "CV. Afia Jaya Abadi". `auth/login` and `auth/register` are **standalone full-HTML pages** with their own navbar copies (they do NOT `@extends('layouts.app')`), so branding/button text changes must be mirrored in `layouts/app.blade.php` + `auth/login.blade.php` + `auth/register.blade.php`. `auth/forgot-password` extends the layout.
+- `AuthController::register` passes `$mobils` (tersedia cars) to `auth/register` for the "Armada Pilihan" section.
+- **Site text (contact, social, `tentang_kami`, `alamat`) lives in the `settings` table** (seeded in DatabaseSeeder, rendered via `Setting::keyBy('key')`) — not hardcoded in views (fallbacks in Blade exist but are only used if the row is missing). Address is currently "Jl. Lintas Sumatera No.162, Bumisari, Kec. Natar, Kabupaten Lampung Selatan".
 - **Route names:** dot notation (`pemesanan.create`, `admin.dashboard`)
 - **Auth auto-redirect:** Admin → `/admin/dashboard`, user → `/dashboard` (see `AuthController::authenticate`)
 - **Guest routes:** `/login`, `/register`, `/forgot-password`
@@ -70,6 +74,6 @@ Single Laravel project. Non-default drivers (all `database`): `SESSION_DRIVER`, 
 
 ## Blade Gotchas (verified parse errors)
 
-- **Never pass an inline array literal to `@json()`.** Laravel's `@json` directive compiles via `explode(',')` on the expression, so any comma inside the expression (e.g. `@json($x->map(fn($p) => ['a' => $p->a, ...]))`) silently mangles the compiled PHP ("Unclosed '[' ... does not match ')'"). Always pre-compute the array in the controller and pass `@json($variable)`. ⚠️ Live bug today: `resources/views/pemesanan/create.blade.php` (~line 290) still passes inline arrays this way and breaks `GET /pesan`.
-- **Never nest `@php ... @endphp` inside another `@php` block.** Blade's `@php(.*?)@endphp` regex is non-greedy and matches first-open to first-close, leaving a literal `@php` in the compiled PHP ("unexpected variable ..."). Use one flat `@php` block. ⚠️ Live bug today: `resources/views/pemesanan/show.blade.php` (~line 40) nests `@php` and breaks `GET /pesanan/{id}`.
+- **Never pass an inline array literal to `@json()`.** Laravel's `@json` directive compiles via `explode(',')` on the expression, so any comma inside the expression (e.g. `@json($x->map(fn($p) => ['a' => $p->a, ...]))`) silently mangles the compiled PHP ("Unclosed '[' ... does not match ')'"). Always pre-compute the array in the controller and pass `@json($variable)`. (Broke `GET /pesan` once — `pemesanan/create.blade.php` now uses `$paketJson`/`$mobilJson` from the controller.)
+- **Never nest `@php ... @endphp` inside another `@php` block.** Blade's `@php(.*?)@endphp` regex is non-greedy and matches first-open to first-close, leaving a literal `@php` in the compiled PHP ("unexpected variable ..."). Use one flat `@php` block. (Broke `GET /pesanan/{id}` once — `pemesanan/show.blade.php` now uses a single flat block.)
 - **Schema drift:** if you get "no such column" on a dev query, the local `database.sqlite` is out of sync with the (edited) migration files — some migrations were rewritten after being run and an old migration record can linger. Fix: `php artisan migrate:fresh --seed` (wipes local data).
